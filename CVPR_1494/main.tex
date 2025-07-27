@@ -1,7 +1,7 @@
 % Peer Review for CVPR 2025 Paper #1494
 % "Show and Segment: Universal Medical Image Segmentation via In-Context Learning"
-
-\documentclass[conference]{IEEEtran}
+\documentclass[review]{cvpr}
+%\documentclass[final]{cvpr}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -49,34 +49,34 @@ This document presents a comprehensive peer review of the paper "Show and Segmen
 \end{abstract}
 
 %%%%%%%%% EXECUTIVE SUMMARY - ABSTRACT - TEAM LEAD
-\input{0_abstract}
+\input{sec/0_abstract}
 
 %%%%%%%%% TECHNICAL CONTRIBUTION - TEAM MEMBER 1
-\input{1_technical_contribution}
+\input{sec/1_technical_contribution}
 
 %%%%%%%%% EXPERIMENTAL METHODOLOGY - TEAM MEMBER 2
-\input{2_experimental_methodology}
+\input{sec/2_experimental_methodology}
 
 %%%%%%%%% RESULTS VALIDATION - TEAM MEMBER 3
-\input{3_results_validation}
+\input{sec/3_results_validation}
 
 %%%%%%%%% LITERATURE REVIEW - TEAM MEMBER 4
-\input{4_literature_review}
+\input{sec/4_literature_review}
 
 %%%%%%%%% PRESENTATION AND CLARITY - TEAM MEMBER 5
-\input{5_presentation_clarity}
+\input{sec/5_presentation_clarity}
 
 %%%%%%%%% DETAILED TECHNICAL COMMENTS - ALL MEMBERS
-\input{6_detailed_comments}
+\input{sec/6_detailed_comments}
 
 %%%%%%%%% QUESTIONS FOR AUTHORS - ALL MEMBERS
-\input{7_questions_authors}
+\input{sec/7_questions_authors}
 
 %%%%%%%%% MINOR ISSUES - TEAM MEMBER 5
-\input{8_minor_issues}
+\input{sec/8_minor_issues}
 
 %%%%%%%%% META-REVIEW AND INTEGRATION - TEAM LEAD
-\input{9_meta_review}
+\input{sec/9_meta_review}
 
 % Balance columns on last page
 \balance
@@ -84,7 +84,7 @@ This document presents a comprehensive peer review of the paper "Show and Segmen
 {
     \small
     \bibliographystyle{IEEEtran}
-    \bibliography{main}  % Note: no .bib extension needed
+    \bibliography{main,reference}  % Note: no .bib extension needed
 }
 
 \end{document}

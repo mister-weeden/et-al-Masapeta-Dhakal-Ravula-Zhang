@@ -1,8 +1,14 @@
 #!/bin/bash
+#!/bin/bash
+
+# Find all .tex files and replace 'section{' with 'section*{'
+find . -type f -name "*.tex" -exec sed -i '' 's/\\section{/\\section*{/g' {} +
+
+rm -f *.aux *.log *.bbl *.blg *.out *.toc *.lof *.lot *.gz *.nav *.snm *.fdb_latexmk *.fls
 
 set -e
 
-MAIN_TEX=cvpr
+MAIN_TEX=main
 REBUTTAL_TEX=CvprRebuttal
 
 echo "🧱 Building main paper ($MAIN_TEX.tex)..."

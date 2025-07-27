@@ -1,6 +1,6 @@
 # Makefile for CVPR LaTeX Submission
 
-MAIN_TEX=cvpr
+MAIN_TEX=main
 REBUTTAL_TEX=CvprRebuttal
 
 all: paper
