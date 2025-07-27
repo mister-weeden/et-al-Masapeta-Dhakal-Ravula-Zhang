@@ -1,0 +1,22 @@
+% balance.sty - Minimal implementation for column balancing
+% This is a fallback version in case the preprint package is not available
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{balance}[2025/01/27 Minimal balance package for CVPR review]
+
+% Define the \balance command
+% In a minimal implementation, this can be a no-op or simple column break
+\newcommand{\balance}{%
+  \ifx\twocolumn\undefined
+    % Single column mode - do nothing
+  \else
+    % Two column mode - try to balance columns
+    \vfill\break
+  \fi
+}
+
+% Alternative implementation that actually tries to balance
+% \newcommand{\balance}{\columnbreak}
+
+% End of package
+\endinput
