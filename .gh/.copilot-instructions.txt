@@ -1,0 +1,15 @@
+# Copilot Instructions for LaTeX Peer Review Article (IEEE, Computer Vision, Machine Learning)
+
+- Use IEEE conference LaTeX style conventions (e.g., \documentclass[review]{cvpr} or IEEEtran).
+- Structure the document with \title, \author, \begin{abstract}, numbered \section, and \bibliography.
+- Use clear, concise academic language suitable for peer review in computer vision and machine learning.
+- Include sections for Abstract, Technical Contribution, Experimental Methodology, Results Validation, Literature Review, Presentation/Clarity, Detailed Comments, Questions for Authors, Minor Issues, and Meta-Review.
+- Use color-coded commands for strengths, weaknesses, and suggestions if defined (e.g., \strength{}, \weakness{}, \suggestion{}).
+- Reference all sources using BibTeX and IEEEtran bibliography style.
+- Ensure all figures use \includegraphics and are referenced in the text.
+- Prefer \section* only for unnumbered sections like Acknowledgments or References.
+- Avoid hardcoding author names or affiliations unless specified.
+- Maintain consistent formatting and indentation in LaTeX code.
+- Do not include confidential or identifying information in the review.
+- For code snippets, use the verbatim or lstlisting environment.
+- When suggesting workflow or automation, use
