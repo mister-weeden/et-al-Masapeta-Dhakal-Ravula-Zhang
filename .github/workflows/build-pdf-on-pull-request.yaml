@@ -29,6 +29,12 @@ on:
           - 'minor'
           - 'major'
 
+# Add permissions for the workflow
+permissions:
+  contents: write  # Required for creating releases
+  actions: read    # Required for downloading artifacts
+  packages: read   # Required for accessing packages
+
 jobs:
   build-pdf:
     runs-on: ubuntu-latest
@@ -269,9 +275,14 @@ jobs:
     needs: build-pdf
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write  # Required for creating releases and tags
+      actions: read    # Required for downloading artifacts
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download PDF artifact
         uses: actions/download-artifact@v4
@@ -279,8 +290,19 @@ jobs:
           name: peer-review-pdf-${{ needs.build-pdf.outputs.version }}
           path: ./release-assets
 
+      - name: Debug release information
+        run: |
+          echo "Creating release with the following information:"
+          echo "Tag: ${{ needs.build-pdf.outputs.version }}"
+          echo "Name: Peer Review ${{ needs.build-pdf.outputs.version }}"
+          echo "Files to upload:"
+          ls -la ./release-assets/
+          echo "GitHub token available: ${{ secrets.GITHUB_TOKEN != '' }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.build-pdf.outputs.version }}
           name: "Peer Review ${{ needs.build-pdf.outputs.version }}"
@@ -290,8 +312,9 @@ jobs:
             ./release-assets/peer-review-${{ needs.build-pdf.outputs.version }}.pdf
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail_on_unmatched_files: false
+          generate_release_notes: false
 
       - name: Update latest release badge
         run: |
