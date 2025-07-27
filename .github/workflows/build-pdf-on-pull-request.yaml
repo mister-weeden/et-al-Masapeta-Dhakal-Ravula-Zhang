@@ -154,8 +154,8 @@ jobs:
       - name: Set up LaTeX environment
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: CVPR_1494/main.tex
-          working_directory: ./
+          root_file: main.tex
+          working_directory: CVPR_1494
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
           extra_system_packages: "py3-pygments"
           pre_compile: |
@@ -219,6 +219,11 @@ jobs:
             fi
             
             echo "LaTeX package setup completed"
+            echo "Current working directory: $PWD"
+            echo "Files in current directory:"
+            ls -la
+            echo "Checking for cvpr.sty:"
+            ls -la cvpr.sty || echo "cvpr.sty not found in current directory"
 
       - name: Verify PDF creation
         run: |

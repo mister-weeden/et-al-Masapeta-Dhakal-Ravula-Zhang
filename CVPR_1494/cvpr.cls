@@ -29,7 +29,7 @@
 % by Paolo.Ienne@di.epfl.ch some mods by awf@acm.org
 %
 % ---------------------------------------------------------------
-%
+%It 
 % no guarantee is given that the format corresponds perfectly to
 % IEEE 8.5" x 11" Proceedings, but most features should be ok.
 %
