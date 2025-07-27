@@ -4,67 +4,110 @@
 
 \subsection{Quantitative Results Analysis}
 \subsubsection{In-distribution Performance (Table 1)}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Analysis of Table 1 reveals:
+The paper demonstrates strong in-distribution performance with Iris achieving 84.52\% average Dice score, closely matching task-specific models:
 \begin{itemize}
-    \item \strength{Strong performance with 89.56\% average Dice score}
-    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    \item Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+    \item \strength{Competitive performance (84.52\%) compared to nnUNet (83.18\%) and universal models (84.18-84.47\%)}
+    \item Consistent performance across diverse datasets spanning CT, MRI, and PET modalities
+    \item Significant improvement over existing in-context methods (best competitor: 61.20\%)
+    \item Particularly strong performance on 3D volumetric tasks where 2D-based methods struggle
 \end{itemize}
 
 \subsubsection{Out-of-distribution Generalization (Table 2)}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Key observations from Table 2:
+Analysis of OOD performance reveals both strengths and limitations:
 \begin{enumerate}
-    \item ACDC: 86.45\% - Lorem ipsum dolor sit amet
-    \item SegTHOR: 82.77\% - Consectetur adipiscing elit
-    \item CSI-fat: 47.78\% - \weakness{Significant performance drop}
+    \item ACDC: 86.45\% - Excellent cardiac segmentation generalization
+    \item SegTHOR: 82.77\% - Strong thoracic organ segmentation
+    \item CSI-fat: 47.78\% - \weakness{Significant performance drop indicates challenges with extreme domain shifts}
+    \item Novel classes: MSD Pancreas (28.28\%), Pelvic (69.03\%) - Mixed results for unseen anatomical structures
 \end{enumerate}
 
 \subsubsection{Novel Class Adaptation Results}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+The adaptation to completely unseen anatomical structures shows promising but limited results:
 \begin{itemize}
-    \item MSD Pancreas Tumor: 28.28\% - Lorem ipsum dolor
-    \item Pelvic: 69.03\% - Sit amet consectetur
+    \item MSD Pancreas Tumor: 28.28\% - Challenging due to small lesion size and high variability
+    \item Pelvic: 69.03\% - Better performance on larger, more structured anatomical regions
 \end{itemize}
 
-\weakness{Lorem ipsum dolor sit amet, the 28.28\% performance on MSD Pancreas raises concerns about the method's ability to handle challenging novel classes.}
+\weakness{The 28.28\% performance on MSD Pancreas raises concerns about the method's ability to handle challenging novel classes with high anatomical variability and small target structures.}
 
 \subsubsection{Computational Efficiency (Table 3)}
-\strength{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Impressive 2.0s inference time for 10 images compared to 659.4s for UniverSeg.}
+\strength{Impressive computational efficiency with 2.0s inference time for 10 images compared to 659.4s for UniverSeg, demonstrating the practical value of the decoupled architecture design.}
+
+\subsection{Implementation and Methodology Suggestions}
+\subsubsection{Computer Vision Libraries and Frameworks}
+For reproducing and extending this work, we recommend the following implementations:
+
+\textbf{Deep Learning Frameworks:}
+\begin{itemize}
+    \item \textbf{PyTorch/PyTorch Lightning:} For implementing the 3D UNet encoder and cross-attention mechanisms
+    \item \textbf{MONAI:} Medical imaging-specific library with pre-built 3D segmentation models and data loaders
+    \item \textbf{TorchIO:} For medical image preprocessing, augmentation, and 3D volume handling
+\end{itemize}
+
+\textbf{Pre-trained Models and Architectures:}
+\begin{itemize}
+    \item \textbf{Hugging Face Transformers:} For implementing cross-attention mechanisms and query-based architectures
+    \item \textbf{Segment Anything Model (SAM):} As baseline comparison for foundation model approaches
+    \item \textbf{nnU-Net:} Reference implementation for task-specific segmentation baselines
+\end{itemize}
+
+\textbf{Medical Imaging Tools:}
+\begin{itemize}
+    \item \textbf{SimpleITK/ITK:} For medical image I/O, resampling, and coordinate transformations
+    \item \textbf{NiBabel:} For handling neuroimaging data formats (NIfTI, DICOM)
+    \item \textbf{PyDicom:} For DICOM file processing and metadata extraction
+\end{itemize}
+
+\subsubsection{Scikit-learn and Traditional ML Integration}
+\begin{itemize}
+    \item \textbf{Scikit-learn:} For implementing similarity metrics in object-level context retrieval
+    \item \textbf{FAISS:} For efficient nearest neighbor search in task embedding space
+    \item \textbf{t-SNE/UMAP:} For visualizing task embedding clusters as shown in Figure 5
+\end{itemize}
+
+\subsubsection{Validation of In-Context Learning Novelty}
+Our literature review confirms that comprehensive in-context learning for 3D medical image segmentation has not been extensively explored:
+\begin{itemize}
+    \item \textbf{UniverSeg~\cite{butoi2023universeg}:} Limited to 2D slice processing, requires multiple forward passes
+    \item \textbf{SegGPT~\cite{wang2023seggpt}:} Primarily designed for natural images, 2D-focused architecture
+    \item \textbf{Tyche-IS~\cite{rakic2024tyche}:} Stochastic approach but lacks computational efficiency optimizations
+    \item \textbf{SAM variants~\cite{cheng2023sam,wang2024sam}:} Rely on positional prompts rather than true in-context learning
+\end{itemize}
 
 \subsection{Qualitative Analysis}
 \subsubsection{Figure Quality and Informativeness}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+The paper provides comprehensive visual analysis:
 \begin{itemize}
-    \item Figure 1: Lorem ipsum dolor sit amet
-    \item Figure 2: Consectetur adipiscing elit
-    \item Figure 3: Sed do eiusmod tempor
-    \item Figure 4: Ut enim ad minim veniam
-    \item Figure 5: \strength{Excellent t-SNE visualization}
+    \item Figure 1: Clear architectural overview showing task encoding and decoding modules
+    \item Figure 2: Effective comparison of inference strategies with quantitative results
+    \item Figure 3: Comprehensive performance analysis across different inference approaches
+    \item Figure 4: Detailed ablation study results showing component contributions
+    \item Figure 5: \strength{Excellent t-SNE visualization demonstrating learned anatomical relationships}
 \end{itemize}
 
 \subsubsection{Visualization Effectiveness}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. \suggestion{Include more failure case visualizations to better understand limitations.}
+The t-SNE visualization of task embeddings effectively demonstrates the model's ability to discover anatomical relationships without explicit supervision. \suggestion{Include more failure case visualizations to better understand limitations, particularly for challenging cases like CSI-fat and small lesion segmentation.}
 
 \subsubsection{Ablation Study Completeness}
-Lorem ipsum dolor sit amet (Table 4):
+The ablation study (Table 4) provides valuable insights:
 \begin{itemize}
-    \item High-resolution processing: +16\% improvement
-    \item Foreground feature: Lorem ipsum
-    \item Query tokens: Dolor sit amet
+    \item High-resolution processing: +16.79\% improvement on small structures (62.13\% → 78.92\%)
+    \item Foreground feature encoding: Crucial for preserving anatomical details
+    \item Query-based contextual encoding: Enables effective global context capture
 \end{itemize}
 
 \subsection{Claims Verification}
 \subsubsection{Support for Each Major Claim}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+Analysis of the paper's main claims:
 \begin{enumerate}
-    \item \textbf{Claim 1:} "Superior performance on in-distribution tasks" - \strength{Supported by Table 1}
-    \item \textbf{Claim 2:} "Better generalization to OOD" - Lorem ipsum dolor sit amet
-    \item \textbf{Claim 3:} "Handles novel classes" - \weakness{Mixed evidence}
-    \item \textbf{Claim 4:} "Discovers anatomical relationships" - Lorem ipsum
+    \item \textbf{Claim 1:} "Superior performance on in-distribution tasks" - \strength{Well-supported by Table 1 results}
+    \item \textbf{Claim 2:} "Better generalization to OOD scenarios" - \strength{Supported for most cases, with noted limitations}
+    \item \textbf{Claim 3:} "Handles novel classes effectively" - \weakness{Mixed evidence, particularly weak for challenging cases}
+    \item \textbf{Claim 4:} "Discovers meaningful anatomical relationships" - \strength{Convincingly demonstrated through t-SNE visualization}
 \end{enumerate}
 
 \subsubsection{Potential Overclaiming}
-\weakness{Lorem ipsum dolor sit amet, consectetur adipiscing elit. The claim of "universal" segmentation may be overstated given the performance on some novel classes.}
+\weakness{The claim of "universal" medical image segmentation may be overstated given the significant performance degradation on challenging domain shifts (CSI-fat: 47.78\%) and novel classes with high variability (MSD Pancreas: 28.28\%).}
 
 \subsubsection{Limitations Acknowledgment}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. \suggestion{The limitations section could be more comprehensive, particularly discussing failure modes.}
+The paper acknowledges some limitations but could be more comprehensive. \suggestion{The limitations section should more thoroughly discuss failure modes, particularly the challenges with extreme domain shifts and small lesion detection, and provide guidance on when the method is most/least suitable.}
