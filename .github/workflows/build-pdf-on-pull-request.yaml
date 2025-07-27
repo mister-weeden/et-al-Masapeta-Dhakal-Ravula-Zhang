@@ -45,9 +45,15 @@ jobs:
         if: ${{ inputs.debug_enabled }}
         run: |
           echo "Repository structure:"
-          find . -name "*.tex" -o -name "*.bib" | head -20
+          find . -name "*.tex" -o -name "*.bib" -o -name "*.sty" -o -name "*.cls" | head -20
+          echo ""
           echo "CVPR_1494 directory contents:"
           ls -la CVPR_1494/ || echo "CVPR_1494 directory not found"
+          echo ""
+          echo "Required files check:"
+          echo "cvpr.sty: $(ls -la CVPR_1494/cvpr.sty 2>/dev/null || echo 'NOT FOUND')"
+          echo "main.tex: $(ls -la CVPR_1494/main.tex 2>/dev/null || echo 'NOT FOUND')"
+          echo "main.bib: $(ls -la CVPR_1494/main.bib 2>/dev/null || echo 'NOT FOUND')"
 
       - name: Calculate version
         id: version
