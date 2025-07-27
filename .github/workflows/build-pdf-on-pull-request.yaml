@@ -1,0 +1,91 @@
+name: Build LaTeX PDF
+
+on:
+  pull_request:
+    paths:
+      - 'CVPR_1494/**.tex'
+      - 'CVPR_1494/**.bib'
+      - '.github/workflows/build-pdf-on-pull-request.yaml'
+  workflow_dispatch:  # This enables manual triggering
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Enable debug mode'
+        required: false
+        default: false
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Debug - List directory structure
+        if: ${{ inputs.debug_enabled }}
+        run: |
+          echo "Repository structure:"
+          find . -name "*.tex" -o -name "*.bib" | head -20
+          echo "CVPR_1494 directory contents:"
+          ls -la CVPR_1494/ || echo "CVPR_1494 directory not found"
+
+      - name: Set up LaTeX environment
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: CVPR_1494/main.tex
+          working_directory: ./
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          extra_system_packages: "py3-pygments"
+          pre_compile: |
+            echo "Installing additional LaTeX packages..."
+            tlmgr update --self
+            tlmgr install collection-fontsrecommended
+            tlmgr install natbib
+            tlmgr install cleveref
+            tlmgr install soul
+            tlmgr install balance
+            tlmgr install enumitem
+            tlmgr install booktabs
+            tlmgr install caption
+            tlmgr install subcaption
+            tlmgr install url
+            tlmgr install hyperref
+            tlmgr install xcolor
+            tlmgr install amsmath
+            tlmgr install amsfonts
+            tlmgr install amssymb
+            tlmgr install graphicx
+            tlmgr install epsfig
+            tlmgr install times
+            tlmgr install silence
+            tlmgr install etoolbox
+
+      - name: Verify PDF creation
+        run: |
+          if [ -f "CVPR_1494/main.pdf" ]; then
+            echo "✅ PDF successfully created"
+            ls -la CVPR_1494/main.pdf
+          else
+            echo "❌ PDF not found"
+            echo "Contents of CVPR_1494 directory:"
+            ls -la CVPR_1494/
+            exit 1
+          fi
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: peer-review-pdf-${{ github.run_number }}
+          path: CVPR_1494/main.pdf
+          retention-days: 30
+
+      - name: Upload build logs (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-${{ github.run_number }}
+          path: |
+            CVPR_1494/*.log
+            CVPR_1494/*.aux
+            CVPR_1494/*.blg
+          retention-days: 7
