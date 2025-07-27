@@ -1,43 +1,62 @@
-% Peer Review for CVPR 2025 Paper #1494
-% "Show and Segment: Universal Medical Image Segmentation via In-Context Learning"
-% Test change (patch): 2025-07-27 16:53:08% Updated with GitHub Actions workflow test
-% Workflow fix test: corrected working directory
+% CVPR 2025 Submission #1494. CONFIDENTIAL REVIEW COPY. DO NOT DISTRIBUTE.
+
 \documentclass[10pt,twocolumn,letterpaper]{article}
-\usepackage{cvpr}
+
+%%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
+\usepackage[review]{cvpr}      % To produce the REVIEW version
+% \usepackage{cvpr}              % To produce the CAMERA-READY version
+% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+
+% Include other packages here, before hyperref.
 \usepackage{times}
 \usepackage{epsfig}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{soul}
 \usepackage{balance} % For balancing columns on last page
+
+% It is strongly recommended to use hyperref, especially for the review version.
+% hyperref with option pagebackref eases the reviewers' job.
+% Please disable hyperref *only* if you encounter grave issues, e.g. with the
+% file validation for the camera-ready version.
+%
+% If you comment hyperref and then uncomment it, you should delete
+% ReviewTempalte.aux before re-running LaTeX.
+% (Or just hit 'q' on the first LaTeX run, let it finish, and you
+%  should be clear).
+\usepackage[pagebackref,breaklinks,colorlinks]{hyperref}
+
+% Support for easy cross-referencing
+\usepackage[capitalize]{cleveref}
+\crefname{section}{Sec.}{Secs.}
+\Crefname{section}{Section}{Sections}
+\Crefname{table}{Table}{Tables}
+\crefname{table}{Tab.}{Tabs.}
 
 % Define colors for different review aspects
 \definecolor{strength}{RGB}{0,128,0}
 \definecolor{weakness}{RGB}{178,34,34}
 \definecolor{suggestion}{RGB}{0,0,139}
 
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=blue,
-    urlcolor=blue
-}
-
 % Custom commands for review annotations
 \newcommand{\strength}[1]{\textcolor{strength}{\textbf{[Strength] }#1}}
 \newcommand{\weakness}[1]{\textcolor{weakness}{\textbf{[Weakness] }#1}}
 \newcommand{\suggestion}[1]{\textcolor{suggestion}{\textbf{[Suggestion] }#1}}
 
-\title{Peer Review Report\\
-Paper \#1494: Show and Segment: Universal Medical Image\\
-Segmentation via In-Context Learning\\
-\vspace{0.5em}
-{\large CVPR 2025}
-}
+%%%%%%%%% PAPER ID  - PLEASE UPDATE
+\def\cvprPaperID{1494} % *** Enter the CVPR Paper ID here
+\def\confName{CVPR}
+\def\confYear{2025}
 
+% Define paperID for compatibility
+\def\paperID{\cvprPaperID}
+
+%%%%%%%%% TITLE - PLEASE UPDATE
+\title{Peer Review Report: Show and Segment: Universal Medical Image Segmentation via In-Context Learning}
+
+%%%%%%%%% AUTHORS - PLEASE UPDATE
 \author{Phaninder Reddy Masapeta (Team Lead), Akhila Ravula, Zezheng Zhang,\\
 Sriya Dhakal, Scott Weeden\\
 Graduate Students in Computer Science\\
@@ -45,12 +64,16 @@ Project Management and Machine Learning Course
 }
 
 \begin{document}
+
+%%%%%%%%% TITLE
 \maketitle
 
+%%%%%%%%% ABSTRACT
 \begin{abstract}
 This document presents a comprehensive peer review of the paper "Show and Segment: Universal Medical Image Segmentation via In-Context Learning" submitted to CVPR 2025. Our five-member review team has evaluated the paper across multiple dimensions including technical contribution, experimental methodology, results validation, literature coverage, and presentation quality. We find that while the paper presents a novel and technically sound approach to medical image segmentation through in-context learning, there are several areas requiring clarification and improvement. Our consensus recommendation is Major Revision, contingent upon addressing the identified concerns regarding statistical validation, code availability, and performance analysis on challenging novel classes.
 \end{abstract}
 
+%%%%%%%%% BODY TEXT
 %%%%%%%%% EXECUTIVE SUMMARY - ABSTRACT - TEAM LEAD
 \input{sec/0_abstract}
 
@@ -84,10 +107,10 @@ This document presents a comprehensive peer review of the paper "Show and Segmen
 % Balance columns on last page
 \balance
 
-{
-    \small
-    \bibliographystyle{IEEEtran}
-    \bibliography{main}  % Note: no .bib extension needed
+%%%%%%%%% REFERENCES
+{\small
+\bibliographystyle{ieee_fullname}
+\bibliography{main}
 }
 
 \end{document}
