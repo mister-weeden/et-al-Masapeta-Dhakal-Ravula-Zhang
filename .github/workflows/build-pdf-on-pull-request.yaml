@@ -19,13 +19,27 @@ on:
         description: 'Enable debug mode'
         required: false
         default: false
+      release_type:
+        type: choice
+        description: 'Release type'
+        required: false
+        default: 'patch'
+        options:
+          - 'patch'
+          - 'minor'
+          - 'major'
 
 jobs:
   build-pdf:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      changes: ${{ steps.changes.outputs.changes }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for version calculation
 
       - name: Debug - List directory structure
         if: ${{ inputs.debug_enabled }}
@@ -34,6 +48,108 @@ jobs:
           find . -name "*.tex" -o -name "*.bib" | head -20
           echo "CVPR_1494 directory contents:"
           ls -la CVPR_1494/ || echo "CVPR_1494 directory not found"
+
+      - name: Calculate version
+        id: version
+        run: |
+          # Get the latest tag, default to v0.0.0 if no tags exist
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag: $LATEST_TAG"
+          
+          # Remove 'v' prefix for version calculation
+          VERSION=${LATEST_TAG#v}
+          IFS='.' read -r -a VERSION_PARTS <<< "$VERSION"
+          MAJOR=${VERSION_PARTS[0]:-0}
+          MINOR=${VERSION_PARTS[1]:-0}
+          PATCH=${VERSION_PARTS[2]:-0}
+          
+          # Determine release type
+          RELEASE_TYPE="${{ inputs.release_type || 'patch' }}"
+          
+          # Check commit messages for version hints
+          RECENT_COMMITS=$(git log --oneline -10 --since="24 hours ago")
+          if echo "$RECENT_COMMITS" | grep -i "breaking\|major"; then
+            RELEASE_TYPE="major"
+          elif echo "$RECENT_COMMITS" | grep -i "feat\|feature\|minor"; then
+            RELEASE_TYPE="minor"
+          fi
+          
+          # Calculate new version
+          case $RELEASE_TYPE in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+          
+          NEW_VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+          echo "New version: $NEW_VERSION"
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "release_type=$RELEASE_TYPE" >> $GITHUB_OUTPUT
+
+      - name: Generate change summary
+        id: changes
+        run: |
+          # Get commits since last tag
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -z "$LATEST_TAG" ]; then
+            COMMITS=$(git log --oneline --since="7 days ago" | head -10)
+          else
+            COMMITS=$(git log --oneline ${LATEST_TAG}..HEAD)
+          fi
+          
+          # Generate change summary
+          CHANGES="## Changes in this release\n\n"
+          
+          # Categorize changes
+          FEATURES=""
+          FIXES=""
+          DOCS=""
+          OTHER=""
+          
+          while IFS= read -r line; do
+            if echo "$line" | grep -qi "feat\|feature\|add"; then
+              FEATURES="${FEATURES}- $line\n"
+            elif echo "$line" | grep -qi "fix\|bug\|error"; then
+              FIXES="${FIXES}- $line\n"
+            elif echo "$line" | grep -qi "doc\|readme\|comment"; then
+              DOCS="${DOCS}- $line\n"
+            else
+              OTHER="${OTHER}- $line\n"
+            fi
+          done <<< "$COMMITS"
+          
+          if [ -n "$FEATURES" ]; then
+            CHANGES="${CHANGES}### ✨ Features\n$FEATURES\n"
+          fi
+          if [ -n "$FIXES" ]; then
+            CHANGES="${CHANGES}### 🐛 Bug Fixes\n$FIXES\n"
+          fi
+          if [ -n "$DOCS" ]; then
+            CHANGES="${CHANGES}### 📚 Documentation\n$DOCS\n"
+          fi
+          if [ -n "$OTHER" ]; then
+            CHANGES="${CHANGES}### 🔧 Other Changes\n$OTHER\n"
+          fi
+          
+          # Add build information
+          CHANGES="${CHANGES}### 📋 Build Information\n"
+          CHANGES="${CHANGES}- Build Date: $(date -u '+%Y-%m-%d %H:%M:%S UTC')\n"
+          CHANGES="${CHANGES}- Commit SHA: ${{ github.sha }}\n"
+          CHANGES="${CHANGES}- Workflow Run: [${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\n"
+          
+          # Save to output (escape newlines for GitHub Actions)
+          echo "changes<<EOF" >> $GITHUB_OUTPUT
+          echo -e "$CHANGES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Set up LaTeX environment
         uses: xu-cheng/latex-action@v3
@@ -71,6 +187,8 @@ jobs:
           if [ -f "CVPR_1494/main.pdf" ]; then
             echo "✅ PDF successfully created"
             ls -la CVPR_1494/main.pdf
+            # Add version info to PDF name
+            cp CVPR_1494/main.pdf CVPR_1494/peer-review-${{ steps.version.outputs.version }}.pdf
           else
             echo "❌ PDF not found"
             echo "Contents of CVPR_1494 directory:"
@@ -81,9 +199,11 @@ jobs:
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: peer-review-pdf-${{ github.run_number }}
-          path: CVPR_1494/main.pdf
-          retention-days: 30
+          name: peer-review-pdf-${{ steps.version.outputs.version }}
+          path: |
+            CVPR_1494/main.pdf
+            CVPR_1494/peer-review-${{ steps.version.outputs.version }}.pdf
+          retention-days: 90
 
       - name: Upload build logs (on failure)
         if: failure()
@@ -95,3 +215,37 @@ jobs:
             CVPR_1494/*.aux
             CVPR_1494/*.blg
           retention-days: 7
+
+  create-release:
+    needs: build-pdf
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: peer-review-pdf-${{ needs.build-pdf.outputs.version }}
+          path: ./release-assets
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.build-pdf.outputs.version }}
+          name: "Peer Review ${{ needs.build-pdf.outputs.version }}"
+          body: ${{ needs.build-pdf.outputs.changes }}
+          files: |
+            ./release-assets/main.pdf
+            ./release-assets/peer-review-${{ needs.build-pdf.outputs.version }}.pdf
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update latest release badge
+        run: |
+          echo "Latest release: ${{ needs.build-pdf.outputs.version }}" > latest-release.txt
+          echo "Build status: ✅ Success" >> latest-release.txt
+          echo "Build date: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> latest-release.txt
