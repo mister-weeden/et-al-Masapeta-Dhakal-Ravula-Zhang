@@ -24,7 +24,8 @@ Welcome! This repo contains the LaTeX structure and resources for your team’s 
 ## File Structure
 
 ```
-cvpr/
+....
+CVPR_1494/
 ├── main.tex                  # Main document
 ├── preamble.tex              # Packages & commands
 ├── main.bib                  # Bibliography (datasets)
@@ -38,6 +39,12 @@ cvpr/
 ├── 7_questions_authors.tex   # All
 ├── 8_minor_issues.tex        # Scott
 └── 9_meta_review.tex         # Phaninder (Lead)
+....
+GUIDELINES/   # IEEE GUIDELINES (DO NOT CHANGE)
+....
+IEEE_1494/    # Show and Segment: PUBLICATION TO REVIEW
+....
+Docs.md...
 ```
 
 ---
