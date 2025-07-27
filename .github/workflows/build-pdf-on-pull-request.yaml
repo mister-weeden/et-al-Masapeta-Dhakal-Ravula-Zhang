@@ -1,6 +1,12 @@
 name: Build LaTeX PDF
 
 on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'CVPR_1494/**.tex'
+      - 'CVPR_1494/**.bib'
+      - '.github/workflows/build-pdf-on-pull-request.yaml'
   pull_request:
     paths:
       - 'CVPR_1494/**.tex'
