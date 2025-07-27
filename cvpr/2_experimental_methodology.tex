@@ -1,0 +1,121 @@
+\section{Experimental Methodology Review}
+\label{sec:experimental_methodology}
+% Lead Author: Team Member 2 (To be assigned)
+
+\subsection{Dataset Analysis}
+To winnow down the citations for peer-review reproducibility, we'll retain only those citations that:
+\begin{itemize}
+\item    Refer to publicly accessible resources, like arXiv or datasets;
+
+  \item  Are essential for reproducing the experiments (e.g., baseline model implementations or benchmark datasets);
+
+\item    Are actually used in evaluations or experimental methodology.
+
+\item Focusing on reproducibility, removing literature citations not directly tied to methods, training procedures, or datasets used in evaluation.
+
+\end{itemize}
+% Retained references (all are available via arXiv or open datasets)
+% Task-specific models
+nnUNet~\cite{isensee2021nnu};
+
+% Universal models
+CLIP-driven~\cite{liu2023clipdriven},
+UniSeg~\cite{ye2023uniseg},
+Multi-Talent~\cite{ulrich2023multitalent};
+
+% Foundation models
+SAM~\cite{kirillov2023segmentanything},
+SAM-Med2D~\cite{cheng2023sammed2d},
+SAM-Med3D~\cite{wang2024sammed3d};
+
+% In-context learning methods
+SegGPT~\cite{wang2023seggpt},
+UniverSeg~\cite{butoi2023universeg},
+Tyche-IS~\cite{rakic2024tyche};
+
+% Optimizer
+Lamb optimizer~\cite{you2019large};
+
+% Retrieval
+Image-level retrieval~\cite{zhang2023makes};
+
+% Datasets
+AMOS~\cite{ji2022amos},
+AutoPET~\cite{gatidis2022autopet},
+BCV~\cite{bcv},
+Brain~\cite{rodrigue2022brain},
+CHAOS~\cite{CHAOS2021},
+KiTS~\cite{heller2019kits19},
+LiTS~\cite{bilic2019liver},
+M\&Ms~\cite{campello2021mnm},
+StructSeg~\cite{structseg},
+CSI~\cite{guoyan2018csi},
+ACDC~\cite{bernard2018acdc},
+SegTHOR~\cite{lambert2020segthor},
+MSD Pancreas~\cite{antonelli2022msd},
+Pelvic~\cite{liu2021pelvic};
+
+\subsubsection{Training Dataset Diversity and Size}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. The paper utilizes 12 datasets for training:
+
+
+
+\begin{itemize}
+    \item \strength{Lorem ipsum dolor sit amet - diverse modalities (CT, MRI, PET)}
+    \item \strength{Consectetur adipiscing elit - multiple body regions}
+    \item Sed do eiusmod tempor incididunt ut labore
+\end{itemize}
+
+\subsubsection{Held-out Dataset Selection Rationale}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. The 7 held-out datasets include:
+\begin{enumerate}
+    \item ACDC - Lorem ipsum dolor sit amet
+    \item SegTHOR - Consectetur adipiscing elit
+    \item CSI variants - Sed do eiusmod tempor
+    \item MSD Pancreas - Ut enim ad minim veniam
+    \item Pelvic1K - Quis nostrud exercitation
+\end{enumerate}
+
+\subsubsection{Data Preprocessing Appropriateness}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. \weakness{The preprocessing pipeline lacks detailed justification for the chosen parameters.}
+
+\subsection{Evaluation Protocol}
+\subsubsection{Train/Validation/Test Split Methodology}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. The 75\%/5\%/20\% split:
+\begin{itemize}
+    \item Lorem ipsum dolor sit amet
+    \item \weakness{Only 5\% validation set may be insufficient}
+    \item Sed do eiusmod tempor incididunt
+\end{itemize}
+
+\subsubsection{Evaluation Metrics Selection}
+\strength{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dice score is appropriate for medical segmentation.} However, additional metrics could strengthen the evaluation:
+\begin{itemize}
+    \item Lorem ipsum dolor sit amet
+    \item Consectetur adipiscing elit
+    \item Sed do eiusmod tempor
+\end{itemize}
+
+\subsubsection{Statistical Significance Testing}
+\weakness{Lorem ipsum dolor sit amet, consectetur adipiscing elit. No statistical significance testing reported.}
+
+\subsection{Baseline Comparisons}
+\subsubsection{Fairness of Baseline Implementations}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. The baselines include:
+\begin{itemize}
+    \item Task-specific models: Lorem ipsum
+    \item Universal models: Dolor sit amet
+    \item SAM variants: Consectetur adipiscing
+    \item In-context methods: Elit sed do
+\end{itemize}
+
+\subsubsection{Missing Comparisons}
+\suggestion{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consider including recent methods like X and Y.}
+
+\subsubsection{Experimental Controls}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. \strength{Good control of experimental variables across different methods.}
+
+Data Citations:
+datasets~\cite{bcv,bilic2019liver,heller2019kits19,ji2022amos,structseg,CHAOS2021,campello2021multi,rodrigue2012beta,gatidis2022whole,martin2023deep} 
+Domain Shift\\
+ACDC~\cite{bernard2018deep}, SegTHOR~\cite{lambert2020segthor}, and three MRI modalities from IVDM3Seg~\cite{ivdm3seg}; MSD Pancreas (Tumor)~\cite{antonelli2022medical} and Pelvic1K (Bone)~\cite{liu2021deep} datasets

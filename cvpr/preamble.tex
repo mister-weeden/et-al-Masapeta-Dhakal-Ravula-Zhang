@@ -1,0 +1,29 @@
+% Additional packages for the peer review document
+% Compatible with IEEEtran conference format
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{lipsum} % For lorem ipsum text if needed
+\usepackage{subfigure}
+
+% Code listing settings
+\lstset{
+    basicstyle=\footnotesize\ttfamily,
+    breaklines=true,
+    frame=single,
+    language=Python
+}
+
+% Custom commands for review annotations (if not defined in main.tex)
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{TODO: }#1}}
+\newcommand{\note}[1]{\textcolor{orange}{\textbf{Note: }#1}}
+
+% Ensure compatibility with IEEEtran
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}

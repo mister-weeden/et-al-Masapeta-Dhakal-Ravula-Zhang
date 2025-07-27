@@ -1,0 +1,78 @@
+\section{Detailed Technical Comments}
+\label{sec:detailed_comments}
+% Lead Authors: All Team Members
+
+\subsection{Major Technical Issues}
+\subsubsection{Team Member 1 - Architecture Concerns}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+\begin{enumerate}
+    \item \weakness{The decoupling of task encoding and inference, while efficient, may lose important query-specific context information.}
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    \item The foreground feature encoding using Equation (2) assumes binary masks are available
+\end{enumerate}
+
+\subsubsection{Team Member 2 - Experimental Design Issues}
+Lorem ipsum dolor sit amet:
+\begin{enumerate}
+    \item \weakness{The 5\% validation split seems insufficient for robust hyperparameter tuning}
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    \item Cross-dataset contamination risks not fully addressed
+\end{enumerate}
+
+\subsubsection{Team Member 3 - Results Interpretation}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+\begin{enumerate}
+    \item \weakness{Performance on CSI-fat (47.78\%) suggests method struggles with large domain shifts}
+    \item Lorem ipsum dolor sit amet
+    \item Statistical significance of improvements not established
+\end{enumerate}
+
+\subsubsection{Team Member 4 - Literature Gaps}
+Lorem ipsum dolor sit amet:
+\begin{enumerate}
+    \item Missing comparison with recent few-shot segmentation methods
+    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    \item Limited discussion of medical-specific challenges
+\end{enumerate}
+
+\subsubsection{Scott Weeden - Presentation Issues}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+\begin{enumerate}
+    \item Mathematical notation inconsistencies between sections
+    \item Lorem ipsum dolor sit amet
+    \item Some figures difficult to interpret without color printing
+\end{enumerate}
+
+\subsection{Minor Technical Issues}
+\begin{itemize}
+    \item Page 3, Eq. 2: Lorem ipsum dolor sit amet
+    \item Section 3.2.1: Consectetur adipiscing elit
+    \item Table 1: Sed do eiusmod tempor incididunt
+    \item Figure 4: Ut enim ad minim veniam
+    \item Algorithm 1: Lorem ipsum dolor sit amet
+\end{itemize}
+
+\subsection{Suggestions for Improvement}
+\subsubsection{Technical Enhancements}
+\begin{enumerate}
+    \item \suggestion{Consider learnable weighting between foreground and contextual features}
+    \item \suggestion{Lorem ipsum dolor sit amet, consectetur adipiscing elit}
+    \item \suggestion{Explore multi-scale task encoding for better handling of small structures}
+    \item \suggestion{Add uncertainty quantification to predictions}
+\end{enumerate}
+
+\subsubsection{Experimental Additions}
+\begin{enumerate}
+    \item \suggestion{Include cross-validation results to demonstrate stability}
+    \item \suggestion{Lorem ipsum dolor sit amet}
+    \item \suggestion{Test on more extreme domain shifts}
+    \item \suggestion{Evaluate on 2D slices for fair comparison with 2D methods}
+\end{enumerate}
+
+\subsubsection{Presentation Improvements}
+\begin{enumerate}
+    \item \suggestion{Add a figure showing failure cases}
+    \item \suggestion{Lorem ipsum dolor sit amet, consectetur adipiscing elit}
+    \item \suggestion{Include runtime analysis on different hardware}
+    \item \suggestion{Provide clearer pseudo-code for the overall algorithm}
+\end{enumerate}
