@@ -3,8 +3,10 @@
     "**/.git": true,
     "**/.DS_Store": true,
     "**/.vscode": true,
-    "**/.gh": true
-    "**/.claude": true
+    "**/.github": true,
+    "**/.claude": true,
+    "GUIDELINES": true,
+    "IEEE_1494": true
   },
   "search.useIgnoreFiles": true,
   "explorer.excludeGitIgnore": true
