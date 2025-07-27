@@ -1,0 +1,26 @@
+name: Build LaTeX PDF
+
+on:
+  pull_request:
+    paths:
+      - 'CVPR_1494/**.tex'
+      - 'CVPR_1494/**.bib'
+      - '.github/workflows/latex-build.yml'
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up LaTeX
+        uses: dante-ev/latex-action@v2
+        with:
+          root_file: CVPR_1494/main.tex
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: peer-review-pdf
+          path: CVPR_1494/main.pdf
