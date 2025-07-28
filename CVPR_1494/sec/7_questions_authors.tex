@@ -1,44 +1,39 @@
 \section{Specific Questions for Authors}
 \label{sec:questions_authors}
 % Lead Authors: All Team Members
+% Phaninder Reddy Masapeta, Sriya Dhakal, Akhila Ravula, Zezheng Zhang, Scott Weeden
 
 \subsection{Clarification Requests}
-\begin{enumerate}
-    \item \textbf{Task Encoding Module Implementation:} How does the task encoding module specifically handle scenarios where reference and query images exhibit significantly different fields of view or imaging parameters? Given that the framework demonstrates strong performance on AMOS and BCV datasets but struggles with CSI-fat (47.78\% Dice), understanding the robustness mechanisms for domain variations would clarify the method's practical limitations and guide appropriate application contexts.
-    
-    \item \textbf{Episodic Training Strategy Details:} Can you provide comprehensive details about the episodic training procedure mentioned in the methodology? Specifically, what sampling strategies are employed for selecting reference-query pairs during training, how is class balance maintained across the twelve diverse training datasets, and what measures prevent the model from overfitting to specific dataset characteristics during the 80,000 iteration training process?
-    
-    \item \textbf{Self-Supervised Pretraining Specifications:} What are the specific implementation details for the 3D SimCLR pretraining approach mentioned as a novel technology? How many epochs and what augmentation strategies are employed, what is the impact on subsequent in-context learning performance beyond the reported 1-2\% Dice improvement, and how does this pretraining strategy compare to other self-supervised approaches for medical imaging?
-    
-    \item \textbf{Computational Resource Requirements:} What are the precise GPU memory requirements for training and inference across different scenarios? Given the reported efficiency advantages over UniverSeg (2.0s vs 659.4s for 10 images), can you provide detailed resource utilization analysis including memory consumption for different numbers of reference images (k=1 vs k=3) and varying input resolutions?
-    
-    \item \textbf{Failure Mode Analysis:} Based on the significant performance variations across datasets (from 86.75\% on AMOS to 47.78\% on CSI-fat), what specific anatomical structures, imaging characteristics, or domain shift scenarios does Iris struggle with most significantly? Understanding these limitations would guide appropriate clinical deployment strategies and inform users about when alternative approaches might be preferable.
-\end{enumerate}
+The review team requires detailed clarification on several critical aspects of the Iris implementation and methodology. First, regarding the task encoding module implementation, we need comprehensive understanding of how the module specifically handles scenarios where reference and query images exhibit significantly different fields of view or imaging parameters. Given that the framework demonstrates strong performance on AMOS and BCV datasets but struggles with CSI-fat (47.78% Dice), understanding the robustness mechanisms for domain variations would clarify the method's practical limitations and guide appropriate application contexts.
+
+Second, we require comprehensive details about the episodic training procedure mentioned in the methodology. Specifically, what sampling strategies are employed for selecting reference-query pairs during training, how is class balance maintained across the twelve diverse training datasets, and what measures prevent the model from overfitting to specific dataset characteristics during the 80,000 iteration training process.
+
+Third, we need specific implementation details for the 3D SimCLR pretraining approach mentioned as a novel technology. How many epochs and what augmentation strategies are employed, what is the impact on subsequent in-context learning performance beyond the reported 1-2% Dice improvement, and how does this pretraining strategy compare to other self-supervised approaches for medical imaging.
+
+Fourth, we require precise GPU memory requirements for training and inference across different scenarios. Given the reported efficiency advantages over UniverSeg (2.0s versus 659.4s for 10 images), detailed resource utilization analysis including memory consumption for different numbers of reference images (k=1 versus k=3) and varying input resolutions would be valuable.
+
+Finally, based on the significant performance variations across datasets (from 86.75% on AMOS to 47.78% on CSI-fat), we need understanding of what specific anatomical structures, imaging characteristics, or domain shift scenarios Iris struggles with most significantly. Understanding these limitations would guide appropriate clinical deployment strategies and inform users about when alternative approaches might be preferable.
 
 \subsection{Additional Experiments Needed}
-\begin{enumerate}
-    \item \textbf{Statistical Significance Validation:} The current experimental evaluation lacks statistical significance testing, which undermines confidence in the reported performance improvements. We strongly recommend implementing paired t-tests or Wilcoxon signed-rank tests between Iris and baseline methods across all evaluated datasets. This statistical validation is essential for establishing the reliability of claimed improvements and supporting publication at a top-tier venue.
-    
-    \item \textbf{Comprehensive Ablation Studies:} Several critical ablation experiments would strengthen understanding of architectural component contributions. These should include systematic evaluation of different numbers of query tokens in the contextual encoding module, analysis of the impact of reference image quality on task embedding effectiveness, assessment of different attention mechanisms within the transformer-based decoder, and investigation of alternative high-resolution processing strategies for preserving fine anatomical details.
-    
-    \item \textbf{Cross-Modal Generalization Analysis:} Given the multi-modal training across CT, MRI, and PET datasets, can you provide detailed analysis of cross-modal generalization performance? Specifically, how does the model perform when trained on one modality and tested on another for the same anatomical structures, such as training on CT abdominal scans and testing on MRI abdominal scans from CHAOS dataset?
-    
-    \item \textbf{Few-Shot Learning Scalability:} The current evaluation focuses primarily on one-shot (k=1) and three-reference (k=3) scenarios. How does performance scale with varying numbers of reference examples (k=2, 5, 10) across different anatomical structures and dataset complexity levels? This analysis would provide valuable insights into the practical trade-offs between reference availability and segmentation accuracy.
-    
-    \item \textbf{Real-Time Clinical Performance:} Can you provide comprehensive analysis of real-time performance characteristics relevant to clinical deployment? This should include frame rates for sequential volume processing, memory usage patterns during extended inference sessions, and performance degradation analysis under resource-constrained environments typical of clinical workstations.
-\end{enumerate}
+The current experimental evaluation requires several critical enhancements to establish publication readiness. Statistical significance validation represents the highest priority need, as the current evaluation lacks statistical significance testing, which undermines confidence in the reported performance improvements. We strongly recommend implementing paired t-tests or Wilcoxon signed-rank tests between Iris and baseline methods across all evaluated datasets. This statistical validation is essential for establishing the reliability of claimed improvements and supporting publication at a top-tier venue.
+
+Comprehensive ablation studies would strengthen understanding of architectural component contributions. These should include systematic evaluation of different numbers of query tokens in the contextual encoding module, analysis of the impact of reference image quality on task embedding effectiveness, assessment of different attention mechanisms within the transformer-based decoder, and investigation of alternative high-resolution processing strategies for preserving fine anatomical details.
+
+Cross-modal generalization analysis would provide valuable insights given the multi-modal training across CT, MRI, and PET datasets. Specifically, how does the model perform when trained on one modality and tested on another for the same anatomical structures, such as training on CT abdominal scans and testing on MRI abdominal scans from CHAOS dataset.
+
+Few-shot learning scalability assessment would complement the current evaluation that focuses primarily on one-shot (k=1) and three-reference (k=3) scenarios. Understanding how performance scales with varying numbers of reference examples (k=2, 5, 10) across different anatomical structures and dataset complexity levels would provide valuable insights into the practical trade-offs between reference availability and segmentation accuracy.
+
+Real-time clinical performance analysis would support deployment planning through comprehensive analysis of real-time performance characteristics relevant to clinical deployment. This should include frame rates for sequential volume processing, memory usage patterns during extended inference sessions, and performance degradation analysis under resource-constrained environments typical of clinical workstations.
 
 \subsection{Missing Information}
-\begin{enumerate}
-    \item \textbf{Code Repository and Reproducibility:} When will the complete implementation code be made publicly available? The absence of code significantly limits reproducibility and community adoption. Please provide a timeline for code release including detailed implementation guidelines, pre-trained model weights, and example usage scripts that would enable other researchers to reproduce the reported results and extend the methodology.
-    
-    \item \textbf{Dataset Split Specifications:} Can you provide exact dataset split specifications including file lists, patient identifiers, and train/validation/test allocations for each of the twelve training datasets? This detailed information is essential for ensuring fair comparison with future methods and enabling precise reproduction of experimental conditions.
-    
-    \item \textbf{Complete Hyperparameter Documentation:} Comprehensive hyperparameter specifications are needed including detailed learning rate schedule implementation (warmup periods, decay strategies), complete data augmentation pipeline with specific transformation probabilities and parameter ranges, batch size selection rationale considering memory constraints and convergence characteristics, and optimizer configuration details beyond the basic LAMB specification.
-    
-    \item \textbf{Clinical Validation Planning:} Are there plans for clinical reader studies or validation with practicing radiologists to assess the practical utility of Iris-generated segmentations? Such validation would provide essential evidence for clinical applicability claims and guide regulatory approval processes for potential clinical deployment.
-    
-    \item \textbf{Method Limitation Guidelines:} Can you provide specific guidance about scenarios where Iris should not be used? Based on the experimental results showing significant performance variations, clear recommendations about anatomical structures, imaging conditions, or clinical scenarios where alternative approaches would be preferable would enhance the practical value of this work.
-    
-    \item \textbf{Baseline Comparison Fairness:} Were all baseline methods trained on identical data splits using the same preprocessing procedures and evaluation protocols? Please provide detailed specifications about baseline implementation details, including any modifications made to accommodate the multi-dataset training regime and ensure fair comparison conditions across all evaluated approaches.
-\end{enumerate}
+Several critical information gaps must be addressed to ensure reproducibility and practical utility. Code repository and reproducibility represent fundamental requirements, as the absence of code significantly limits reproducibility and community adoption. The authors should provide a timeline for code release including detailed implementation guidelines, pre-trained model weights, and example usage scripts that would enable other researchers to reproduce the reported results and extend the methodology.
+
+Dataset split specifications require complete documentation including exact dataset split specifications with file lists, patient identifiers, and train/validation/test allocations for each of the twelve training datasets. This detailed information is essential for ensuring fair comparison with future methods and enabling precise reproduction of experimental conditions.
+
+Complete hyperparameter documentation is needed including detailed learning rate schedule implementation (warmup periods, decay strategies), complete data augmentation pipeline with specific transformation probabilities and parameter ranges, batch size selection rationale considering memory constraints and convergence characteristics, and optimizer configuration details beyond the basic LAMB specification.
+
+Clinical validation planning would strengthen the practical relevance claims through plans for clinical reader studies or validation with practicing radiologists to assess the practical utility of Iris-generated segmentations. Such validation would provide essential evidence for clinical applicability claims and guide regulatory approval processes for potential clinical deployment.
+
+Method limitation guidelines would enhance practical utility through specific guidance about scenarios where Iris should not be used. Based on the experimental results showing significant performance variations, clear recommendations about anatomical structures, imaging conditions, or clinical scenarios where alternative approaches would be preferable would enhance the practical value of this work.
+
+Baseline comparison fairness requires verification that all baseline methods were trained on identical data splits using the same preprocessing procedures and evaluation protocols. Detailed specifications about baseline implementation details, including any modifications made to accommodate the multi-dataset training regime and ensure fair comparison conditions across all evaluated approaches, would strengthen the comparative analysis.
