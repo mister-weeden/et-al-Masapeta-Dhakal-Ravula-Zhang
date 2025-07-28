@@ -4,75 +4,47 @@
 
 \subsection{Major Technical Issues}
 \subsubsection{Team Member 1 - Architecture Concerns}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit:
-\begin{enumerate}
-    \item \weakness{The decoupling of task encoding and inference, while efficient, may lose important query-specific context information.}
-    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    \item The foreground feature encoding using Equation (2) assumes binary masks are available
-\end{enumerate}
+The architectural design raises several significant concerns that warrant careful consideration. \weakness{The decoupling of task encoding and inference, while achieving impressive computational efficiency, potentially sacrifices important query-specific context information that could enhance segmentation accuracy.} The separation means that task embeddings are computed independently of the specific query image characteristics, which may limit the model's ability to adapt the task representation based on query-specific features such as image quality, field of view, or anatomical variations.
+
+The foreground feature encoding mechanism assumes availability of binary segmentation masks during reference processing, which creates a dependency on high-quality annotations. This requirement may limit practical applicability in scenarios where reference annotations contain uncertainty or partial labeling. Additionally, the high-resolution processing pathway, while preserving anatomical detail, introduces substantial memory overhead that may constrain clinical deployment scenarios.
 
 \subsubsection{Team Member 2 - Experimental Design Issues}
-Lorem ipsum dolor sit amet:
-\begin{enumerate}
-    \item \weakness{The 5\% validation split seems insufficient for robust hyperparameter tuning}
-    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    \item Cross-dataset contamination risks not fully addressed
-\end{enumerate}
+The experimental methodology demonstrates several design limitations that impact the reliability of conclusions. \weakness{The 5\% validation split allocation appears insufficient for robust hyperparameter tuning, particularly given the complexity of the multi-dataset training regime and the diversity of anatomical structures across datasets.} This limited validation set may result in overfitting to specific dataset characteristics and reduce confidence in generalization performance.
+
+Cross-dataset contamination risks require more thorough analysis, particularly given the potential overlap in patient populations or imaging protocols across the twelve training datasets. The episodic training strategy, while theoretically sound, lacks detailed analysis of sampling bias effects that could influence learned representations. The standardization to 128×128×128 resolution, while computationally efficient, may introduce artifacts that affect fine anatomical structure preservation.
 
 \subsubsection{Team Member 3 - Results Interpretation}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit:
-\begin{enumerate}
-    \item \weakness{Performance on CSI-fat (47.78\%) suggests method struggles with large domain shifts}
-    \item Lorem ipsum dolor sit amet
-    \item Statistical significance of improvements not established
-\end{enumerate}
+The quantitative results reveal concerning performance patterns that suggest fundamental limitations in the approach. \weakness{The substantial performance degradation on CSI-fat dataset (47.78\% Dice score) indicates significant difficulties with extreme domain shifts, raising questions about the claimed universality of the method.} This performance drop suggests that the learned task embeddings may not capture sufficient domain-invariant features to handle challenging cross-modality scenarios.
+
+\weakness{The absence of statistical significance testing throughout the experimental evaluation undermines confidence in reported performance improvements and limits the ability to distinguish genuine methodological advances from statistical noise.} The mixed results on novel class adaptation, particularly the 28.28\% performance on MSD Pancreas Tumor, suggest that the in-context learning paradigm may struggle with anatomical structures that exhibit high inter-patient variability or small target sizes.
 
 \subsubsection{Team Member 4 - Literature Gaps}
-Lorem ipsum dolor sit amet:
-\begin{enumerate}
-    \item Missing comparison with recent few-shot segmentation methods
-    \item Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    \item Limited discussion of medical-specific challenges
-\end{enumerate}
+The related work coverage demonstrates notable omissions that limit the positioning of contributions within the broader research landscape. Missing comparisons with recent few-shot segmentation methods from the computer vision literature that have been adapted for medical applications create gaps in competitive analysis. The literature review inadequately addresses medical-specific challenges such as class imbalance, anatomical variability, and annotation quality issues that distinguish medical segmentation from natural image tasks.
+
+The positioning relative to domain adaptation techniques and meta-learning approaches for medical imaging lacks sufficient depth to establish clear novelty claims. Additionally, the discussion of foundation model approaches could benefit from more comprehensive treatment of recent developments in medical AI that address similar generalization challenges through alternative methodological approaches.
 
 \subsubsection{Scott Weeden - Presentation Issues}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit:
-\begin{enumerate}
-    \item Mathematical notation inconsistencies between sections
-    \item Lorem ipsum dolor sit amet
-    \item Some figures difficult to interpret without color printing
-\end{enumerate}
+The manuscript presentation exhibits several inconsistencies that impact clarity and professional appearance. Mathematical notation varies between sections, particularly in the representation of feature dimensions and tensor operations, creating potential confusion for readers attempting to understand implementation details. Some figures present challenges for interpretation in grayscale printing scenarios, which may limit accessibility for certain readers.
+
+The algorithmic descriptions lack sufficient detail for reliable reproduction, particularly regarding the specific implementation of attention mechanisms and the precise sequence of operations during inference. Table formatting issues, including font size limitations and information density concerns, may impair readability and comprehension of key experimental results.
 
 \subsection{Minor Technical Issues}
-\begin{itemize}
-    \item Page 3, Eq. 2: Lorem ipsum dolor sit amet
-    \item Section 3.2.1: Consectetur adipiscing elit
-    \item Table 1: Sed do eiusmod tempor incididunt
-    \item Figure 4: Ut enim ad minim veniam
-    \item Algorithm 1: Lorem ipsum dolor sit amet
-\end{itemize}
+Several technical elements require attention to enhance manuscript quality and accuracy. The mathematical formulation in Equation 2 could benefit from clearer variable definitions and explicit dimensionality specifications. Section numbering inconsistencies appear in the methodology description, potentially creating confusion regarding the relationship between architectural components. Table formatting issues include alignment problems and missing statistical indicators that would enhance result interpretation.
+
+Figure quality concerns include resolution limitations in certain architectural diagrams and potential color accessibility issues that may affect comprehension for readers with visual impairments. Algorithm pseudo-code lacks sufficient detail for implementation guidance, particularly regarding hyperparameter specifications and initialization procedures.
 
 \subsection{Suggestions for Improvement}
 \subsubsection{Technical Enhancements}
-\begin{enumerate}
-    \item \suggestion{Consider learnable weighting between foreground and contextual features}
-    \item \suggestion{Lorem ipsum dolor sit amet, consectetur adipiscing elit}
-    \item \suggestion{Explore multi-scale task encoding for better handling of small structures}
-    \item \suggestion{Add uncertainty quantification to predictions}
-\end{enumerate}
+Several architectural modifications could address identified limitations and enhance overall performance. \suggestion{Implementation of learnable weighting mechanisms between foreground and contextual features could provide more adaptive task representation that balances local detail preservation with global context integration.} This enhancement would allow the model to automatically adjust feature importance based on the specific characteristics of each segmentation task.
+
+\suggestion{Exploration of multi-scale task encoding approaches could improve handling of small anatomical structures by incorporating features at multiple resolution levels within the task embedding computation.} Additionally, integration of uncertainty quantification mechanisms would provide valuable confidence estimates for clinical applications where segmentation reliability assessment is critical for decision-making processes.
 
 \subsubsection{Experimental Additions}
-\begin{enumerate}
-    \item \suggestion{Include cross-validation results to demonstrate stability}
-    \item \suggestion{Lorem ipsum dolor sit amet}
-    \item \suggestion{Test on more extreme domain shifts}
-    \item \suggestion{Evaluate on 2D slices for fair comparison with 2D methods}
-\end{enumerate}
+The experimental validation framework would benefit from several methodological enhancements that address current limitations. \suggestion{Implementation of cross-validation procedures would demonstrate training stability and provide more robust performance estimates across different data splits.} This approach would help establish confidence intervals for reported performance metrics and reduce concerns about overfitting to specific dataset characteristics.
+
+\suggestion{Evaluation on more extreme domain shift scenarios would provide clearer understanding of method limitations and guide appropriate application contexts.} Additionally, comparative evaluation on 2D slice-level tasks would enable fair comparison with 2D-focused methods and establish the specific advantages of 3D processing for different anatomical structures.
 
 \subsubsection{Presentation Improvements}
-\begin{enumerate}
-    \item \suggestion{Add a figure showing failure cases}
-    \item \suggestion{Lorem ipsum dolor sit amet, consectetur adipiscing elit}
-    \item \suggestion{Include runtime analysis on different hardware}
-    \item \suggestion{Provide clearer pseudo-code for the overall algorithm}
-\end{enumerate}
+Several presentation enhancements would improve manuscript clarity and accessibility. \suggestion{Addition of failure case visualizations would provide valuable insights into method limitations and guide users regarding appropriate application scenarios.} This analysis would enhance understanding of when alternative approaches might be preferable and support informed method selection for specific clinical applications.
+
+\suggestion{Inclusion of comprehensive runtime analysis across different hardware configurations would support deployment planning and resource allocation decisions for clinical institutions.} Clearer algorithmic pseudo-code with explicit implementation details would enhance reproducibility and facilitate adoption by the research community.

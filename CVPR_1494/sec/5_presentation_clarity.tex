@@ -4,85 +4,43 @@
 
 \subsection{Paper Organization}
 \subsubsection{Logical Flow and Structure}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. The paper follows a logical structure:
-\begin{enumerate}
-    \item Introduction - Lorem ipsum dolor sit amet
-    \item Related Work - Consectetur adipiscing elit
-    \item Method - Sed do eiusmod tempor
-    \item Experiments - Ut enim ad minim veniam
-    \item Discussion - Quis nostrud exercitation
-\end{enumerate}
+The manuscript follows a well-organized structure that guides readers through the research systematically. The introduction effectively establishes the problem context of medical image segmentation challenges, particularly the limitations of task-specific models when encountering diverse anatomical structures and imaging modalities. The related work section provides appropriate background on existing approaches, including universal models, foundation models, and in-context learning methods. The methodology section clearly explains the Iris architecture, including the decoupled task encoding approach and multiple inference strategies. The experimental section comprehensively evaluates performance across diverse datasets, and the results analysis provides thorough validation of the proposed approach.
 
-\strength{Lorem ipsum dolor sit amet, clear progression from problem statement to solution.}
+\strength{The logical progression from problem identification through solution development to comprehensive evaluation demonstrates clear scientific reasoning and effective manuscript organization.}
 
 \subsubsection{Section Balance}
-Lorem ipsum dolor sit amet:
-\begin{itemize}
-    \item Introduction: 1.5 pages - Lorem ipsum
-    \item Related Work: 1 page - \weakness{Could be more concise}
-    \item Method: 2.5 pages - Appropriate depth
-    \item Experiments: 3 pages - Lorem ipsum
-    \item Discussion: 0.5 pages - \weakness{Too brief}
-\end{itemize}
+The manuscript demonstrates generally appropriate section allocation, with the methodology receiving adequate space for technical details and the experimental section providing comprehensive evaluation coverage. The introduction effectively motivates the research problem without excessive background material. The related work section efficiently positions the work within existing literature. However, the discussion section appears relatively brief given the complexity of the proposed approach and the breadth of experimental findings. \weakness{The discussion section could benefit from expansion to more thoroughly analyze implications, limitations, and future research directions.}
 
 \subsubsection{Abstract and Introduction Effectiveness}
-\strength{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Abstract clearly summarizes key contributions.} However, \suggestion{the introduction could better motivate the specific design choices.}
+\strength{The abstract effectively summarizes the key contributions, including the novel in-context learning framework, decoupled task encoding architecture, and comprehensive experimental validation across diverse medical imaging datasets.} The introduction successfully establishes the clinical importance of medical image segmentation and clearly articulates the limitations of current approaches. However, \suggestion{the introduction could strengthen motivation for specific architectural choices, particularly the rationale for decoupled task encoding and the selection of transformer-based components.}
 
 \subsection{Writing Quality}
 \subsubsection{Clarity of Technical Descriptions}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit:
-\begin{itemize}
-    \item \strength{Clear explanation of task encoding module}
-    \item Lorem ipsum dolor sit amet
-    \item \weakness{Some mathematical notation could be better explained}
-\end{itemize}
+The technical exposition demonstrates strong clarity in explaining complex architectural components. \strength{The task encoding module explanation effectively conveys the dual-stream approach combining foreground and contextual feature processing.} The mathematical formulation properly extends traditional segmentation notation to in-context learning scenarios. The description of multiple inference strategies clearly differentiates between one-shot inference, context ensemble, object-level retrieval, and in-context tuning approaches.
+
+\weakness{Certain mathematical notation elements could benefit from more detailed explanation, particularly the bidirectional cross-attention mechanism and the specific implementation of pixel shuffle operations.}
 
 \subsubsection{Grammar and Language}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Minor issues identified:
-\begin{itemize}
-    \item Page 3: "Lorem ipsum" should be "Lorem ipsum dolor"
-    \item Page 5: Inconsistent use of hyphens
-    \item Overall: \strength{Generally well-written}
-\end{itemize}
+The manuscript maintains professional academic writing standards throughout most sections. The technical terminology remains consistent across sections, and the sentence structure effectively communicates complex concepts. Minor grammatical inconsistencies appear in several locations, including occasional unclear pronoun references and inconsistent hyphenation patterns. \strength{The overall writing quality supports clear communication of technical contributions without significant language barriers.}
 
 \subsubsection{Terminology Consistency}
-Lorem ipsum dolor sit amet:
-\begin{itemize}
-    \item "Context" vs "Reference" - Lorem ipsum
-    \item "Task encoding" vs "Task embedding" - Needs clarification
-    \item \suggestion{Create a terminology table}
-\end{itemize}
+The manuscript generally maintains consistent terminology, though several terms warrant clarification for improved precision. The distinction between "context" and "reference" requires more explicit definition, particularly given their interchangeable usage in different sections. Similarly, "task encoding" and "task embedding" appear to refer to related but potentially distinct concepts that would benefit from clearer differentiation. \suggestion{A terminology table in the appendix would enhance clarity and support reproducibility efforts.}
 
 \subsection{Figures and Tables}
 \subsubsection{Quality and Readability}
-Analysis of visual elements:
-\begin{itemize}
-    \item \strength{Figure 1: Excellent paradigm comparison}
-    \item Figure 2: Lorem ipsum dolor sit amet
-    \item Table 1: \weakness{Font size too small}
-    \item Table 2: Lorem ipsum dolor
-    \item Figure 5: \strength{Informative t-SNE visualization}
-\end{itemize}
+The visual presentation demonstrates strong quality across most elements. \strength{Figure 1 provides excellent architectural overview, clearly illustrating the relationship between task encoding and mask decoding components.} The performance comparison charts effectively communicate quantitative results across different inference strategies. \strength{The t-SNE visualization convincingly demonstrates learned anatomical relationships within the task embedding space.}
+
+\weakness{Several tables suffer from font size limitations that may impair readability in print formats.} The information density in certain tables creates challenges for rapid comprehension of key results.
 
 \subsubsection{Caption Completeness}
-Lorem ipsum dolor sit amet:
-\begin{itemize}
-    \item \strength{Most captions are self-contained}
-    \item \weakness{Table 3 caption lacks details about experimental setup}
-    \item Lorem ipsum dolor sit amet
-\end{itemize}
+Most figure and table captions provide appropriate context for understanding the presented information. \strength{The captions generally offer sufficient detail to support independent interpretation without requiring extensive reference to the main text.} However, \weakness{certain table captions lack essential details about experimental setup and evaluation protocols that would enhance reproducibility.}
 
 \subsubsection{Information Density}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. \suggestion{Consider splitting Table 1 into two tables for better readability.}
+The tables present substantial information efficiently, though the density occasionally challenges readability. \suggestion{Consideration should be given to splitting complex tables into multiple components or relocating detailed information to supplementary materials while maintaining key results in the main manuscript.}
 
 \subsection{Supplementary Material}
 \subsubsection{Completeness and Usefulness}
-Lorem ipsum dolor sit amet:
-\begin{itemize}
-    \item Dataset details: Lorem ipsum
-    \item Additional experiments: Dolor sit amet
-    \item Implementation details: \strength{Comprehensive}
-\end{itemize}
+The supplementary material provides valuable additional detail supporting the main manuscript claims. \strength{Implementation details receive comprehensive treatment, supporting reproducibility efforts.} The additional experimental results enhance understanding of method performance across diverse scenarios.
 
 \subsubsection{Integration with Main Paper}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. \weakness{Some critical details relegated to supplement should be in main paper.}
+The relationship between main manuscript content and supplementary material generally supports effective information organization. However, \weakness{certain implementation details currently relegated to supplementary material appear sufficiently important for inclusion in the main manuscript, particularly those essential for reproducibility.} The balance between main paper focus and comprehensive documentation could benefit from reconsideration to ensure that essential technical details remain accessible to readers.

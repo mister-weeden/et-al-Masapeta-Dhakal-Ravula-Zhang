@@ -4,52 +4,41 @@
 
 \subsection{Clarification Requests}
 \begin{enumerate}
-    \item \textbf{Task Encoding Module:} Lorem ipsum dolor sit amet, consectetur adipiscing elit? Specifically, how does the module handle cases where the reference and query images have significantly different fields of view?
+    \item \textbf{Task Encoding Module Implementation:} How does the task encoding module specifically handle scenarios where reference and query images exhibit significantly different fields of view or imaging parameters? Given that the framework demonstrates strong performance on AMOS and BCV datasets but struggles with CSI-fat (47.78\% Dice), understanding the robustness mechanisms for domain variations would clarify the method's practical limitations and guide appropriate application contexts.
     
-    \item \textbf{Training Strategy:} Can you clarify the episodic training procedure mentioned in Section 4.1? Lorem ipsum dolor sit amet?
+    \item \textbf{Episodic Training Strategy Details:} Can you provide comprehensive details about the episodic training procedure mentioned in the methodology? Specifically, what sampling strategies are employed for selecting reference-query pairs during training, how is class balance maintained across the twelve diverse training datasets, and what measures prevent the model from overfitting to specific dataset characteristics during the 80,000 iteration training process?
     
-    \item \textbf{Memory Bank:} Lorem ipsum dolor sit amet, consectetur adipiscing elit? How is the exponential moving average initialized?
+    \item \textbf{Self-Supervised Pretraining Specifications:} What are the specific implementation details for the 3D SimCLR pretraining approach mentioned as a novel technology? How many epochs and what augmentation strategies are employed, what is the impact on subsequent in-context learning performance beyond the reported 1-2\% Dice improvement, and how does this pretraining strategy compare to other self-supervised approaches for medical imaging?
     
-    \item \textbf{Computational Requirements:} What are the GPU memory requirements for training? Lorem ipsum dolor sit amet?
+    \item \textbf{Computational Resource Requirements:} What are the precise GPU memory requirements for training and inference across different scenarios? Given the reported efficiency advantages over UniverSeg (2.0s vs 659.4s for 10 images), can you provide detailed resource utilization analysis including memory consumption for different numbers of reference images (k=1 vs k=3) and varying input resolutions?
     
-    \item \textbf{Failure Modes:} Lorem ipsum dolor sit amet, consectetur adipiscing elit? What types of anatomical structures does Iris struggle with most?
+    \item \textbf{Failure Mode Analysis:} Based on the significant performance variations across datasets (from 86.75\% on AMOS to 47.78\% on CSI-fat), what specific anatomical structures, imaging characteristics, or domain shift scenarios does Iris struggle with most significantly? Understanding these limitations would guide appropriate clinical deployment strategies and inform users about when alternative approaches might be preferable.
 \end{enumerate}
 
 \subsection{Additional Experiments Needed}
 \begin{enumerate}
-    \item \textbf{Statistical Testing:} Lorem ipsum dolor sit amet, consectetur adipiscing elit? We suggest paired t-tests between methods.
+    \item \textbf{Statistical Significance Validation:} The current experimental evaluation lacks statistical significance testing, which undermines confidence in the reported performance improvements. We strongly recommend implementing paired t-tests or Wilcoxon signed-rank tests between Iris and baseline methods across all evaluated datasets. This statistical validation is essential for establishing the reliability of claimed improvements and supporting publication at a top-tier venue.
     
-    \item \textbf{Ablation Studies:}
-    \begin{itemize}
-        \item Effect of different numbers of query tokens
-        \item Lorem ipsum dolor sit amet
-        \item Impact of reference image quality
-    \end{itemize}
+    \item \textbf{Comprehensive Ablation Studies:} Several critical ablation experiments would strengthen understanding of architectural component contributions. These should include systematic evaluation of different numbers of query tokens in the contextual encoding module, analysis of the impact of reference image quality on task embedding effectiveness, assessment of different attention mechanisms within the transformer-based decoder, and investigation of alternative high-resolution processing strategies for preserving fine anatomical details.
     
-    \item \textbf{Cross-Modal Evaluation:} Lorem ipsum dolor sit amet? For example, training on CT and testing on MRI for the same organ?
+    \item \textbf{Cross-Modal Generalization Analysis:} Given the multi-modal training across CT, MRI, and PET datasets, can you provide detailed analysis of cross-modal generalization performance? Specifically, how does the model perform when trained on one modality and tested on another for the same anatomical structures, such as training on CT abdominal scans and testing on MRI abdominal scans from CHAOS dataset?
     
-    \item \textbf{Few-Shot Learning:} How does performance scale with 2, 5, 10 reference examples? Lorem ipsum dolor sit amet.
+    \item \textbf{Few-Shot Learning Scalability:} The current evaluation focuses primarily on one-shot (k=1) and three-reference (k=3) scenarios. How does performance scale with varying numbers of reference examples (k=2, 5, 10) across different anatomical structures and dataset complexity levels? This analysis would provide valuable insights into the practical trade-offs between reference availability and segmentation accuracy.
     
-    \item \textbf{Real-time Performance:} Lorem ipsum dolor sit amet, consectetur adipiscing elit? Can you provide frame rates for video processing?
+    \item \textbf{Real-Time Clinical Performance:} Can you provide comprehensive analysis of real-time performance characteristics relevant to clinical deployment? This should include frame rates for sequential volume processing, memory usage patterns during extended inference sessions, and performance degradation analysis under resource-constrained environments typical of clinical workstations.
 \end{enumerate}
 
 \subsection{Missing Information}
 \begin{enumerate}
-    \item \textbf{Code Availability:} Lorem ipsum dolor sit amet? When will the code be released?
+    \item \textbf{Code Repository and Reproducibility:} When will the complete implementation code be made publicly available? The absence of code significantly limits reproducibility and community adoption. Please provide a timeline for code release including detailed implementation guidelines, pre-trained model weights, and example usage scripts that would enable other researchers to reproduce the reported results and extend the methodology.
     
-    \item \textbf{Dataset Splits:} Lorem ipsum dolor sit amet, consectetur adipiscing elit? Can you provide exact file lists?
+    \item \textbf{Dataset Split Specifications:} Can you provide exact dataset split specifications including file lists, patient identifiers, and train/validation/test allocations for each of the twelve training datasets? This detailed information is essential for ensuring fair comparison with future methods and enabling precise reproduction of experimental conditions.
     
-    \item \textbf{Hyperparameters:} Lorem ipsum dolor sit amet:
-    \begin{itemize}
-        \item Learning rate schedule details
-        \item Lorem ipsum dolor sit amet
-        \item Data augmentation probabilities
-        \item Batch size selection rationale
-    \end{itemize}
+    \item \textbf{Complete Hyperparameter Documentation:} Comprehensive hyperparameter specifications are needed including detailed learning rate schedule implementation (warmup periods, decay strategies), complete data augmentation pipeline with specific transformation probabilities and parameter ranges, batch size selection rationale considering memory constraints and convergence characteristics, and optimizer configuration details beyond the basic LAMB specification.
     
-    \item \textbf{Clinical Validation:} Lorem ipsum dolor sit amet, consectetur adipiscing elit? Any plans for clinical reader studies?
+    \item \textbf{Clinical Validation Planning:} Are there plans for clinical reader studies or validation with practicing radiologists to assess the practical utility of Iris-generated segmentations? Such validation would provide essential evidence for clinical applicability claims and guide regulatory approval processes for potential clinical deployment.
     
-    \item \textbf{Limitations:} Lorem ipsum dolor sit amet? Specific examples of when Iris should not be used?
+    \item \textbf{Method Limitation Guidelines:} Can you provide specific guidance about scenarios where Iris should not be used? Based on the experimental results showing significant performance variations, clear recommendations about anatomical structures, imaging conditions, or clinical scenarios where alternative approaches would be preferable would enhance the practical value of this work.
     
-    \item \textbf{Comparison Details:} Lorem ipsum dolor sit amet, consectetur adipiscing elit? Were all baselines trained on the same data splits?
+    \item \textbf{Baseline Comparison Fairness:} Were all baseline methods trained on identical data splits using the same preprocessing procedures and evaluation protocols? Please provide detailed specifications about baseline implementation details, including any modifications made to accommodate the multi-dataset training regime and ensure fair comparison conditions across all evaluated approaches.
 \end{enumerate}

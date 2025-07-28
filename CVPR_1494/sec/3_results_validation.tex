@@ -1,113 +1,53 @@
 \section{Results and Claims Validation}
 \label{sec:results_validation}
-% Lead Author: Team Member 3 (To be assigned)
+% Lead Author: Akhila Ravula
+% Team Members: Phaninder Reddy Masapeta, Sriya Dhakal, Zezheng Zhang, Scott Weeden
 
 \subsection{Quantitative Results Analysis}
-\subsubsection{In-distribution Performance (Table 1)}
-The paper demonstrates strong in-distribution performance with Iris achieving 84.52\% average Dice score, closely matching task-specific models:
-\begin{itemize}
-    \item \strength{Competitive performance (84.52\%) compared to nnUNet (83.18\%) and universal models (84.18-84.47\%)}
-    \item Consistent performance across diverse datasets spanning CT, MRI, and PET modalities
-    \item Significant improvement over existing in-context methods (best competitor: 61.20\%)
-    \item Particularly strong performance on 3D volumetric tasks where 2D-based methods struggle
-\end{itemize}
+\subsubsection{In-distribution Performance Analysis}
+The paper demonstrates competitive in-distribution performance with Iris achieving 84.52% average Dice score, closely matching task-specific models. The results show competitive performance compared to nnUNet (83.18%) and universal models (84.18-84.47%), with consistent performance across diverse datasets spanning CT, MRI, and PET modalities. Significant improvement over existing in-context methods emerges with the best competitor achieving only 61.20%. Particularly strong performance appears on 3D volumetric tasks where 2D-based methods struggle.
 
-\subsubsection{Out-of-distribution Generalization (Table 2)}
-Analysis of OOD performance reveals both strengths and limitations:
-\begin{enumerate}
-    \item ACDC: 86.45\% - Excellent cardiac segmentation generalization
-    \item SegTHOR: 82.77\% - Strong thoracic organ segmentation
-    \item CSI-fat: 47.78\% - \weakness{Significant performance drop indicates challenges with extreme domain shifts}
-    \item Novel classes: MSD Pancreas (28.28\%), Pelvic (69.03\%) - Mixed results for unseen anatomical structures
-\end{enumerate}
+\subsubsection{Out-of-distribution Generalization Results}
+Analysis of out-of-distribution performance reveals both strengths and limitations across evaluated datasets. ACDC demonstrates excellent cardiac segmentation generalization at 86.45%. SegTHOR shows strong thoracic organ segmentation at 82.77%. CSI-fat exhibits significant performance drop to 47.78%, indicating challenges with extreme domain shifts. Novel classes show mixed results with MSD Pancreas at 28.28% and Pelvic at 69.03% for unseen anatomical structures.
 
-\subsubsection{Novel Class Adaptation Results}
-The adaptation to completely unseen anatomical structures shows promising but limited results:
-\begin{itemize}
-    \item MSD Pancreas Tumor: 28.28\% - Challenging due to small lesion size and high variability
-    \item Pelvic: 69.03\% - Better performance on larger, more structured anatomical regions
-\end{itemize}
+The 28.28% performance on MSD Pancreas raises concerns about the method's ability to handle challenging novel classes with high anatomical variability and small target structures.
 
-\weakness{The 28.28\% performance on MSD Pancreas raises concerns about the method's ability to handle challenging novel classes with high anatomical variability and small target structures.}
+\subsubsection{Novel Class Adaptation Assessment}
+The adaptation to completely unseen anatomical structures shows promising but limited results. MSD Pancreas Tumor performance at 28.28% proves challenging due to small lesion size and high variability. Pelvic performance at 69.03% demonstrates better results on larger, more structured anatomical regions.
 
-\subsubsection{Computational Efficiency (Table 3)}
-\strength{Impressive computational efficiency with 2.0s inference time for 10 images compared to 659.4s for UniverSeg, demonstrating the practical value of the decoupled architecture design.}
+\subsubsection{Computational Efficiency Validation}
+Impressive computational efficiency emerges with 2.0s inference time for 10 images compared to 659.4s for UniverSeg, demonstrating the practical value of the decoupled architecture design.
 
-\subsection{Implementation and Methodology Suggestions}
+\subsection{Implementation and Methodology Recommendations}
 \subsubsection{Computer Vision Libraries and Frameworks}
-For reproducing and extending this work, we recommend the following implementations:
+For reproducing and extending this work, several implementation frameworks are recommended. Deep Learning Frameworks include PyTorch and PyTorch Lightning for implementing the 3D UNet encoder and cross-attention mechanisms, MONAI as a medical imaging-specific library with pre-built 3D segmentation models and data loaders, and TorchIO for medical image preprocessing, augmentation, and 3D volume handling.
 
-\textbf{Deep Learning Frameworks:}
-\begin{itemize}
-    \item \textbf{PyTorch/PyTorch Lightning:} For implementing the 3D UNet encoder and cross-attention mechanisms
-    \item \textbf{MONAI:} Medical imaging-specific library with pre-built 3D segmentation models and data loaders
-    \item \textbf{TorchIO:} For medical image preprocessing, augmentation, and 3D volume handling
-\end{itemize}
+Pre-trained Models and Architectures encompass Hugging Face Transformers for implementing cross-attention mechanisms and query-based architectures, Segment Anything Model (SAM) as baseline comparison for foundation model approaches, and nnU-Net as reference implementation for task-specific segmentation baselines.
 
-\textbf{Pre-trained Models and Architectures:}
-\begin{itemize}
-    \item \textbf{Hugging Face Transformers:} For implementing cross-attention mechanisms and query-based architectures
-    \item \textbf{Segment Anything Model (SAM):} As baseline comparison for foundation model approaches
-    \item \textbf{nnU-Net:} Reference implementation for task-specific segmentation baselines
-\end{itemize}
+Medical Imaging Tools include SimpleITK and ITK for medical image input/output, resampling, and coordinate transformations, NiBabel for handling neuroimaging data formats including NIfTI and DICOM, and PyDicom for DICOM file processing and metadata extraction.
 
-\textbf{Medical Imaging Tools:}
-\begin{itemize}
-    \item \textbf{SimpleITK/ITK:} For medical image I/O, resampling, and coordinate transformations
-    \item \textbf{NiBabel:} For handling neuroimaging data formats (NIfTI, DICOM)
-    \item \textbf{PyDicom:} For DICOM file processing and metadata extraction
-\end{itemize}
-
-\subsubsection{Scikit-learn and Traditional ML Integration}
-\begin{itemize}
-    \item \textbf{Scikit-learn:} For implementing similarity metrics in object-level context retrieval
-    \item \textbf{FAISS:} For efficient nearest neighbor search in task embedding space
-    \item \textbf{t-SNE/UMAP:} For visualizing task embedding clusters as shown in Figure 5
-\end{itemize}
+\subsubsection{Traditional Machine Learning Integration}
+Scikit-learn provides implementation support for similarity metrics in object-level context retrieval. FAISS enables efficient nearest neighbor search in task embedding space. t-SNE and UMAP support visualizing task embedding clusters as demonstrated in Figure 5.
 
 \subsubsection{Validation of In-Context Learning Novelty}
-Our literature review confirms that comprehensive in-context learning for 3D medical image segmentation has not been extensively explored:
-\begin{itemize}
-    \item \textbf{UniverSeg~\cite{butoi2023universeg}:} Limited to 2D slice processing, requires multiple forward passes
-    \item \textbf{SegGPT~\cite{wang2023seggpt}:} Primarily designed for natural images, 2D-focused architecture
-    \item \textbf{Tyche-IS~\cite{rakic2024tyche}:} Stochastic approach but lacks computational efficiency optimizations
-    \item \textbf{SAM variants~\cite{cheng2023sam,wang2024sam}:} Rely on positional prompts rather than true in-context learning
-\end{itemize}
+Literature review confirms that comprehensive in-context learning for 3D medical image segmentation has not been extensively explored. UniverSeg demonstrates limitations to 2D slice processing and requires multiple forward passes. SegGPT focuses primarily on natural images with 2D-focused architecture. Tyche-IS provides stochastic approach but lacks computational efficiency optimizations. SAM variants rely on positional prompts rather than true in-context learning.
 
 \subsection{Qualitative Analysis}
 \subsubsection{Figure Quality and Informativeness}
-The paper provides comprehensive visual analysis:
-\begin{itemize}
-    \item Figure 1: Clear architectural overview showing task encoding and decoding modules
-    \item Figure 2: Effective comparison of inference strategies with quantitative results
-    \item Figure 3: Comprehensive performance analysis across different inference approaches
-    \item Figure 4: Detailed ablation study results showing component contributions
-    \item Figure 5: \strength{Excellent t-SNE visualization demonstrating learned anatomical relationships}
-\end{itemize}
+The paper provides comprehensive visual analysis across multiple figures. Figure 1 offers clear architectural overview showing task encoding and decoding modules. Figure 2 presents effective comparison of inference strategies with quantitative results. Figure 3 provides comprehensive performance analysis across different inference approaches. Figure 4 shows detailed ablation study results demonstrating component contributions. Figure 5 presents excellent t-SNE visualization demonstrating learned anatomical relationships.
 
 \subsubsection{Visualization Effectiveness}
-The t-SNE visualization of task embeddings effectively demonstrates the model's ability to discover anatomical relationships without explicit supervision. \suggestion{Include more failure case visualizations to better understand limitations, particularly for challenging cases like CSI-fat and small lesion segmentation.}
+The t-SNE visualization of task embeddings effectively demonstrates the model's ability to discover anatomical relationships without explicit supervision. Including more failure case visualizations would better illuminate limitations, particularly for challenging cases like CSI-fat and small lesion segmentation.
 
 \subsubsection{Ablation Study Completeness}
-The ablation study (Table 4) provides valuable insights:
-\begin{itemize}
-    \item High-resolution processing: +16.79\% improvement on small structures (62.13\% → 78.92\%)
-    \item Foreground feature encoding: Crucial for preserving anatomical details
-    \item Query-based contextual encoding: Enables effective global context capture
-\end{itemize}
+The ablation study provides valuable insights across multiple components. High-resolution processing shows +16.79% improvement on small structures (62.13% to 78.92%). Foreground feature encoding proves crucial for preserving anatomical details. Query-based contextual encoding enables effective global context capture.
 
 \subsection{Claims Verification}
 \subsubsection{Support for Each Major Claim}
-Analysis of the paper's main claims:
-\begin{enumerate}
-    \item \textbf{Claim 1:} "Superior performance on in-distribution tasks" - \strength{Well-supported by Table 1 results}
-    \item \textbf{Claim 2:} "Better generalization to OOD scenarios" - \strength{Supported for most cases, with noted limitations}
-    \item \textbf{Claim 3:} "Handles novel classes effectively" - \weakness{Mixed evidence, particularly weak for challenging cases}
-    \item \textbf{Claim 4:} "Discovers meaningful anatomical relationships" - \strength{Convincingly demonstrated through t-SNE visualization}
-\end{enumerate}
+Analysis of the paper's main claims reveals varying levels of support. The claim of superior performance on in-distribution tasks receives strong support from Table 1 results. Better generalization to out-of-distribution scenarios shows support for most cases, with noted limitations. The claim of effective novel class handling demonstrates mixed evidence, particularly weak for challenging cases. The discovery of meaningful anatomical relationships receives convincing demonstration through t-SNE visualization.
 
 \subsubsection{Potential Overclaiming}
-\weakness{The claim of "universal" medical image segmentation may be overstated given the significant performance degradation on challenging domain shifts (CSI-fat: 47.78\%) and novel classes with high variability (MSD Pancreas: 28.28\%).}
+The claim of universal medical image segmentation may be overstated given the significant performance degradation on challenging domain shifts (CSI-fat: 47.78%) and novel classes with high variability (MSD Pancreas: 28.28%).
 
 \subsubsection{Limitations Acknowledgment}
-The paper acknowledges some limitations but could be more comprehensive. \suggestion{The limitations section should more thoroughly discuss failure modes, particularly the challenges with extreme domain shifts and small lesion detection, and provide guidance on when the method is most/least suitable.}
+The paper acknowledges some limitations but could be more comprehensive. The limitations section should more thoroughly discuss failure modes, particularly the challenges with extreme domain shifts and small lesion detection, and provide guidance on when the method is most and least suitable.

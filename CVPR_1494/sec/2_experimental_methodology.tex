@@ -1,121 +1,48 @@
 \section{Experimental Methodology Review}
 \label{sec:experimental_methodology}
-% Lead Author: Team Member 2 (To be assigned)
+% Lead Author: Sriya Dhakal
+% Team Members: Phaninder Reddy Masapeta, Akhila Ravula, Zezheng Zhang, Scott Weeden
 
 \subsection{Dataset Analysis}
-To winnow down the citations for peer-review reproducibility, we'll retain only those citations that:
-\begin{itemize}
-\item    Refer to publicly accessible resources, like arXiv or datasets;
-
-  \item  Are essential for reproducing the experiments (e.g., baseline model implementations or benchmark datasets);
-
-\item    Are actually used in evaluations or experimental methodology.
-
-\item Focusing on reproducibility, removing literature citations not directly tied to methods, training procedures, or datasets used in evaluation.
-
-\end{itemize}
-% Retained references (all are available via arXiv or open datasets)
-% Task-specific models
-nnUNet~\cite{isensee2021nnu};
-
-% Universal models
-CLIP-driven~\cite{liu2023clipdriven},
-UniSeg~\cite{ye2023uniseg},
-Multi-Talent~\cite{ulrich2023multitalent};
-
-% Foundation models
-SAM~\cite{kirillov2023segmentanything},
-SAM-Med2D~\cite{cheng2023sammed2d},
-SAM-Med3D~\cite{wang2024sammed3d};
-
-% In-context learning methods
-SegGPT~\cite{wang2023seggpt},
-UniverSeg~\cite{butoi2023universeg},
-Tyche-IS~\cite{rakic2024tyche};
-
-% Optimizer
-Lamb optimizer~\cite{you2019large};
-
-% Retrieval
-Image-level retrieval~\cite{zhang2023makes};
-
-% Datasets
-AMOS~\cite{ji2022amos},
-AutoPET~\cite{gatidis2022autopet},
-BCV~\cite{bcv},
-Brain~\cite{rodrigue2022brain},
-CHAOS~\cite{CHAOS2021},
-KiTS~\cite{heller2019kits19},
-LiTS~\cite{bilic2019liver},
-M\&Ms~\cite{campello2021mnm},
-StructSeg~\cite{structseg},
-CSI~\cite{guoyan2018csi},
-ACDC~\cite{bernard2018acdc},
-SegTHOR~\cite{lambert2020segthor},
-MSD Pancreas~\cite{antonelli2022msd},
-Pelvic~\cite{liu2021pelvic};
-
 \subsubsection{Training Dataset Diversity and Size}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. The paper utilizes 12 datasets for training:
+The experimental design leverages twelve comprehensive medical imaging datasets spanning multiple modalities and anatomical regions. The training data demonstrates exceptional diversity across imaging modalities including CT, MRI (T1-DUAL, T2-SPIR), and PET scans. The datasets encompass diverse anatomical structures ranging from abdominal organs to cardiac structures, providing robust coverage for universal segmentation evaluation.
 
+Key dataset characteristics include AMOS with 500 CT and 100 MRI scans covering 15 abdominal organs including liver, spleen, and kidneys. BCV (AbdomenCT-1K) contributes 100 CT scans focusing on primary abdominal organs. CHAOS provides balanced CT and MRI representation with 20 scans each, specifically targeting liver, kidney, and spleen segmentation tasks.
 
-
-\begin{itemize}
-    \item \strength{Lorem ipsum dolor sit amet - diverse modalities (CT, MRI, PET)}
-    \item \strength{Consectetur adipiscing elit - multiple body regions}
-    \item Sed do eiusmod tempor incididunt ut labore
-\end{itemize}
+The dataset composition demonstrates excellent modality diversity across CT, MRI, and PET imaging, ensuring robust cross-modal generalization capabilities. Comprehensive anatomical coverage spanning multiple body regions supports the universal segmentation claims. The preprocessing standardization to 128×128×128 volumes using preprocess.py ensures consistent input dimensions across diverse source datasets.
 
 \subsubsection{Held-out Dataset Selection Rationale}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. The 7 held-out datasets include:
-\begin{enumerate}
-    \item ACDC - Lorem ipsum dolor sit amet
-    \item SegTHOR - Consectetur adipiscing elit
-    \item CSI variants - Sed do eiusmod tempor
-    \item MSD Pancreas - Ut enim ad minim veniam
-    \item Pelvic1K - Quis nostrud exercitation
-\end{enumerate}
+The evaluation protocol employs seven strategically selected held-out datasets to assess generalization performance. The out-of-distribution evaluation includes ACDC for cardiac segmentation validation, SegTHOR for thoracic organ assessment, and CSI variants for domain shift analysis. The inclusion of MSD Pancreas Tumor and Pelvic1K datasets specifically tests novel class adaptation capabilities on anatomical structures not represented in training data.
+
+This selection strategy effectively tests both domain shift robustness and novel class generalization, two critical aspects of universal medical image segmentation systems.
 
 \subsubsection{Data Preprocessing Appropriateness}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. \weakness{The preprocessing pipeline lacks detailed justification for the chosen parameters.}
+The preprocessing pipeline standardizes all volumes to 128×128×128 resolution using cubic interpolation. While this approach ensures computational efficiency and consistent batch processing, the preprocessing pipeline lacks detailed justification for the chosen resolution parameters and potential impact on fine anatomical structure preservation.
 
 \subsection{Evaluation Protocol}
 \subsubsection{Train/Validation/Test Split Methodology}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. The 75\%/5\%/20\% split:
-\begin{itemize}
-    \item Lorem ipsum dolor sit amet
-    \item \weakness{Only 5\% validation set may be insufficient}
-    \item Sed do eiusmod tempor incididunt
-\end{itemize}
+The experimental design employs a 75% training, 5% validation, and 20% test split across the twelve training datasets. This distribution follows established practices in medical imaging research, although the 5% validation set allocation may be insufficient for robust hyperparameter tuning and early stopping criteria, particularly given the complexity of the multi-dataset training regime.
+
+The episodic training strategy simulates few-shot in-context learning conditions by sampling reference-query pairs during training, effectively preparing the model for inference-time adaptation scenarios.
 
 \subsubsection{Evaluation Metrics Selection}
-\strength{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dice score is appropriate for medical segmentation.} However, additional metrics could strengthen the evaluation:
-\begin{itemize}
-    \item Lorem ipsum dolor sit amet
-    \item Consectetur adipiscing elit
-    \item Sed do eiusmod tempor
-\end{itemize}
+The primary reliance on Dice Similarity Coefficient represents an appropriate choice for medical segmentation evaluation, providing meaningful overlap assessment between predicted and ground truth segmentations. The Dice metric effectively captures both precision and recall aspects of segmentation quality, making it particularly suitable for medical applications where both false positives and false negatives carry clinical significance.
+
+However, the evaluation framework could benefit from additional complementary metrics such as Hausdorff distance for boundary quality assessment and sensitivity analysis for clinical relevance evaluation.
 
 \subsubsection{Statistical Significance Testing}
-\weakness{Lorem ipsum dolor sit amet, consectetur adipiscing elit. No statistical significance testing reported.}
+The experimental methodology demonstrates a critical deficiency in statistical validation, with no reported significance testing across performance comparisons. This absence undermines confidence in claimed performance improvements and limits the reliability of comparative analysis against baseline methods. Statistical validation through paired t-tests or similar approaches would strengthen the experimental rigor.
 
 \subsection{Baseline Comparisons}
 \subsubsection{Fairness of Baseline Implementations}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. The baselines include:
-\begin{itemize}
-    \item Task-specific models: Lorem ipsum
-    \item Universal models: Dolor sit amet
-    \item SAM variants: Consectetur adipiscing
-    \item In-context methods: Elit sed do
-\end{itemize}
+The comparative evaluation encompasses diverse baseline categories including task-specific models (nnUNet), universal segmentation approaches (CLIP-driven, UniSeg, Multi-Talent), foundation models (SAM variants), and in-context learning methods (SegGPT, UniverSeg, Tyche-IS).
+
+The baseline selection provides comprehensive coverage of relevant methodological approaches, enabling meaningful performance comparison across different paradigms. The experimental design ensures fair comparison by maintaining consistent evaluation protocols and dataset splits across all baseline methods.
 
 \subsubsection{Missing Comparisons}
-\suggestion{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consider including recent methods like X and Y.}
+The baseline comparison could benefit from inclusion of more recent foundation model adaptations and domain-specific in-context learning approaches that have emerged in medical imaging.
 
 \subsubsection{Experimental Controls}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. \strength{Good control of experimental variables across different methods.}
+The methodology demonstrates strong experimental control by maintaining consistent data preprocessing, evaluation metrics, and hardware configurations across all compared methods. This standardization ensures that performance differences reflect methodological innovations rather than implementation variations.
 
-Data Citations:
-datasets~\cite{bcv,bilic2019liver,heller2019kits19,ji2022amos,structseg,CHAOS2021,campello2021multi,rodrigue2012beta,gatidis2022whole,martin2023deep} 
-Domain Shift\\
-ACDC~\cite{bernard2018deep}, SegTHOR~\cite{lambert2020segthor}, and three MRI modalities from IVDM3Seg~\cite{ivdm3seg}; MSD Pancreas (Tumor)~\cite{antonelli2022medical} and Pelvic1K (Bone)~\cite{liu2021deep} datasets
+The use of identical training data and evaluation protocols across different approaches provides reliable foundations for comparative analysis, though the absence of statistical testing limits the strength of conclusions that can be drawn from observed performance differences.

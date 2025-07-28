@@ -1,65 +1,41 @@
 \section{Technical Contribution Evaluation}
 \label{sec:technical_contribution}
-% Lead Author: Team Member 1 (To be assigned)
+% Lead Author: Phaninder Reddy Masapeta
+% Team Members: Sriya Dhakal, Akhila Ravula, Zezheng Zhang, Scott Weeden
 
 \subsection{Novelty Assessment}
 \subsubsection{Comparison with UniverSeg, Tyche, SegGPT}
-The paper introduces Iris, a novel in-context learning framework for medical image segmentation that addresses key limitations of existing approaches. Unlike UniverSeg~\cite{butoi2023universeg}, which processes each class separately requiring multiple forward passes, Iris handles multi-class segmentation in a single forward pass through its unified task encoding architecture. Compared to SegGPT~\cite{wang2023seggpt}, which operates on 2D slices, Iris is designed for native 3D volumetric processing, crucial for medical imaging applications. The approach also differs from Tyche-IS~\cite{rakic2024tyche} by introducing a decoupled task encoding module that can be precomputed and reused, significantly improving computational efficiency.
+The paper introduces Iris, a novel in-context learning framework for medical image segmentation that addresses key limitations of existing approaches. Unlike UniverSeg, which processes each class separately requiring multiple forward passes, Iris handles multi-class segmentation in a single forward pass through its unified task encoding architecture. Compared to SegGPT, which operates on 2D slices, Iris is designed for native 3D volumetric processing, crucial for medical imaging applications. The approach also differs from Tyche-IS by introducing a decoupled task encoding module that can be precomputed and reused, significantly improving computational efficiency.
 
 \subsubsection{Innovation in Task Encoding Approach}
-The core innovation lies in the dual-stream task encoding module that combines foreground feature encoding with contextual feature encoding. The foreground encoding operates at high resolution to preserve fine anatomical details, while the contextual encoding uses learnable query tokens with memory-efficient pixel shuffle operations~\cite{shi2016real}. This design enables the model to capture both local anatomical structures and global contextual information from reference examples.
+The core innovation lies in the dual-stream task encoding module that combines foreground feature encoding with contextual feature encoding. The foreground encoding operates at high resolution to preserve fine anatomical details, while the contextual encoding uses learnable query tokens with memory-efficient pixel shuffle operations. This design enables the model to capture both local anatomical structures and global contextual information from reference examples.
 
 \subsubsection{Architectural Contributions}
-The proposed architecture introduces several key innovations:
-\begin{itemize}
-    \item \textbf{Decoupled Task Encoding:} Separates task representation learning from segmentation inference, enabling efficient reuse of task embeddings
-    \item \textbf{High-Resolution Processing:} Maintains fine anatomical details through upsampling and direct mask application at original resolution
-    \item \textbf{Multi-Class Single Pass:} Handles multiple anatomical structures simultaneously, unlike methods requiring separate passes per class
-    \item \textbf{Flexible Inference Strategies:} Supports one-shot inference, context ensemble, object-level retrieval, and in-context tuning
-\end{itemize}
+The proposed architecture introduces several key innovations. Decoupled Task Encoding separates task representation learning from segmentation inference, enabling efficient reuse of task embeddings. High-Resolution Processing maintains fine anatomical details through upsampling and direct mask application at original resolution. Multi-Class Single Pass handles multiple anatomical structures simultaneously, unlike methods requiring separate passes per class. Flexible Inference Strategies support one-shot inference, context ensemble, object-level retrieval, and in-context tuning.
 
 \subsection{Data Sources and Methodology}
 \subsubsection{Training Data Composition}
-The methodology leverages 12 diverse medical imaging datasets spanning multiple modalities and anatomical regions:
-\begin{itemize}
-    \item \textbf{Abdominal Imaging:} AMOS~\cite{ji2022amos}, BCV~\cite{bcv}, CHAOS~\cite{CHAOS2021}, KiTS~\cite{heller2019kits19}, LiTS~\cite{bilic2019liver}
-    \item \textbf{Cardiac Imaging:} M\&Ms~\cite{campello2021multi}, ACDC~\cite{bernard2018deep}
-    \item \textbf{Thoracic Imaging:} SegTHOR~\cite{lambert2020segthor}, StructSeg~\cite{structseg}
-    \item \textbf{Whole-Body Imaging:} AutoPET~\cite{gatidis2022whole}
-    \item \textbf{Neurological Imaging:} Brain datasets~\cite{rodrigue2012beta}
-    \item \textbf{Specialized Applications:} Pelvic bone segmentation~\cite{liu2021deep}, pancreatic tumor detection~\cite{antonelli2022medical}
-\end{itemize}
+The methodology leverages twelve diverse medical imaging datasets spanning multiple modalities and anatomical regions. Abdominal Imaging includes AMOS, BCV, CHAOS, KiTS, and LiTS datasets. Cardiac Imaging encompasses M&Ms and ACDC datasets. Thoracic Imaging covers SegTHOR and StructSeg datasets. Whole-Body Imaging utilizes AutoPET data. Neurological Imaging incorporates Brain datasets. Specialized Applications include Pelvic bone segmentation and pancreatic tumor detection datasets.
 
 \subsubsection{In-Context Learning Validation}
-The paper demonstrates that in-context learning for medical image segmentation has not been comprehensively addressed in existing literature. While foundation models like SAM~\cite{kirillov2023segment} and its medical variants SAM-Med2D~\cite{cheng2023sam}, SAM-Med3D~\cite{wang2024sam} rely on positional prompts, true in-context learning approaches like UniverSeg~\cite{butoi2023universeg} and Tyche-IS~\cite{rakic2024tyche} have significant limitations in 3D processing and computational efficiency.
+The paper demonstrates that in-context learning for medical image segmentation has not been comprehensively addressed in existing literature. While foundation models like SAM and its medical variants SAM-Med2D and SAM-Med3D rely on positional prompts, true in-context learning approaches like UniverSeg and Tyche-IS have significant limitations in 3D processing and computational efficiency.
 
 \subsection{Technical Soundness}
 \subsubsection{Mathematical Formulation Validity}
-The mathematical formulation properly extends traditional segmentation from task-specific mapping $f_{\theta_t}: \mathcal{X} \rightarrow \mathcal{Y}$ to in-context learning $f_\theta(\boldsymbol{x}_q; \mathcal{S})$, where the model conditions on support set $\mathcal{S}$ containing reference image-label pairs. The bidirectional cross-attention mechanism and task embedding concatenation are mathematically sound and well-motivated.
+The mathematical formulation properly extends traditional segmentation from task-specific mapping to in-context learning, where the model conditions on support set containing reference image-label pairs. The bidirectional cross-attention mechanism and task embedding concatenation are mathematically sound and well-motivated.
 
 \subsubsection{Architecture Design Rationale}
-\strength{The decoupled architecture design is well-justified, addressing computational efficiency concerns while maintaining segmentation quality.} The high-resolution foreground encoding addresses the critical challenge of preserving fine anatomical structures that could be lost in downsampled feature maps. However, \weakness{the paper could benefit from more detailed analysis of memory consumption trade-offs in the high-resolution processing pipeline.}
+The decoupled architecture design is well-justified, addressing computational efficiency concerns while maintaining segmentation quality. The high-resolution foreground encoding addresses the critical challenge of preserving fine anatomical structures that could be lost in downsampled feature maps. However, the paper could benefit from more detailed analysis of memory consumption trade-offs in the high-resolution processing pipeline.
 
 \subsubsection{Computational Complexity Analysis}
-The claimed $O(k + m)$ complexity compared to $O(kmn)$ in UniverSeg represents a significant theoretical improvement:
-\begin{itemize}
-    \item Time complexity: Linear scaling with number of queries rather than multiplicative scaling
-    \item Space complexity: Efficient through pixel shuffle operations and task embedding reuse
-    \item Inference efficiency: Single forward pass for multi-class segmentation
-\end{itemize}
+The claimed O(k + m) complexity compared to O(kmn) in UniverSeg represents a significant theoretical improvement through time complexity with linear scaling, space complexity efficiency through pixel shuffle operations and task embedding reuse, and inference efficiency enabling single forward pass for multi-class segmentation.
 
 \subsection{Implementation Quality}
 \subsubsection{Code Availability and Documentation}
-\weakness{The paper does not provide a code repository link or detailed implementation guidelines, which limits reproducibility and adoption by the research community.}
+The paper does not provide a code repository link or detailed implementation guidelines, which limits reproducibility and adoption by the research community. This represents a significant gap that must be addressed in revision.
 
 \subsubsection{Reproducibility Assessment}
-The paper provides sufficient implementation details for reproduction:
-\begin{enumerate}
-    \item 3D UNet encoder architecture with specific hyperparameters
-    \item LAMB optimizer~\cite{you2019large} with learning rate schedule
-    \item Training protocol with 80K iterations and episodic sampling
-    \item Data augmentation strategies and volume preprocessing
-\end{enumerate}
+The paper provides sufficient implementation details for reproduction including 3D UNet encoder architecture with specific hyperparameters, LAMB optimizer with learning rate schedule, training protocol with 80K iterations and episodic sampling, and data augmentation strategies with volume preprocessing.
 
 \subsubsection{Technical Details Completeness}
-\suggestion{The authors should provide more details on the episodic training strategy, particularly regarding the sampling procedure for reference-query pairs and the handling of class imbalance across different datasets. Additionally, more information on the cross-attention mechanism implementation would enhance reproducibility.}
+The authors should provide more details on the episodic training strategy, particularly regarding the sampling procedure for reference-query pairs and the handling of class imbalance across different datasets. Additionally, more information on the cross-attention mechanism implementation would enhance reproducibility.

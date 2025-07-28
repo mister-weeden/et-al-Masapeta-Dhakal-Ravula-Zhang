@@ -1,84 +1,46 @@
 \section{Literature Review and Positioning}
 \label{sec:literature_review}
-% Lead Author: Team Member 4 (To be assigned)
+% Lead Author: Zezheng Zhang
+% Team Members: Phaninder Reddy Masapeta, Sriya Dhakal, Akhila Ravula, Scott Weeden
 
 \subsection{Related Work Coverage}
 \subsubsection{Completeness of Literature Review}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. The paper covers three main categories:
-\begin{enumerate}
-    \item Medical Universal Models - Lorem ipsum dolor sit amet
-    \item SAM-based Interactive Models - Consectetur adipiscing elit
-    \item Visual In-context Learning - Sed do eiusmod tempor
-\end{enumerate}
+The paper demonstrates comprehensive coverage of the medical image segmentation landscape by organizing related work into three strategically relevant categories. The first category encompasses medical universal models, examining approaches that attempt to generalize across multiple anatomical structures and imaging modalities without task-specific training. The second category analyzes SAM-based interactive models that leverage foundation model architectures for medical applications, including SAM-Med2D and SAM-Med3D variants. The third category addresses visual in-context learning approaches, positioning the current work within the emerging paradigm of few-shot learning for image segmentation tasks.
 
-\strength{Lorem ipsum dolor sit amet, comprehensive coverage of recent work in medical image segmentation.}
+The literature review provides comprehensive coverage of recent developments in medical image segmentation, effectively establishing the research context and identifying key methodological gaps that Iris addresses.
 
 \subsubsection{Fair Representation of Prior Work}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Analysis of citations:
-\begin{itemize}
-    \item UniverSeg [5] - Lorem ipsum dolor sit amet
-    \item Tyche [39] - Consectetur adipiscing elit
-    \item SAM variants [23, 34, 46] - Sed do eiusmod
-\end{itemize}
+The paper provides balanced treatment of existing approaches, acknowledging both strengths and limitations of competing methods. UniverSeg receives appropriate recognition for pioneering universal medical segmentation while noting its computational inefficiencies and 2D processing limitations. Tyche-IS is properly credited for stochastic segmentation approaches while highlighting the lack of efficiency optimizations. SAM variants are fairly assessed for their foundation model capabilities while noting their reliance on positional prompts rather than true in-context learning.
+
+The comparative analysis demonstrates intellectual honesty by recognizing genuine contributions from prior work rather than dismissing competing approaches, which strengthens the paper's credibility and positions Iris appropriately within the broader research ecosystem.
 
 \subsubsection{Missing Important References}
-\weakness{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Missing recent work on:}
-\begin{itemize}
-    \item Lorem ipsum dolor sit amet
-    \item Consectetur adipiscing elit
-    \item Sed do eiusmod tempor incididunt
-\end{itemize}
+The literature review could benefit from expanded coverage of recent developments in few-shot medical image segmentation and domain adaptation techniques that have emerged in concurrent work. Additionally, more comprehensive discussion of self-supervised pretraining approaches in medical imaging would strengthen the positioning of the proposed 3D SimCLR enhancement.
 
 \subsection{Comparison with State-of-the-Art}
 \subsubsection{Positioning Against Existing Methods}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. The paper positions Iris as:
-\begin{itemize}
-    \item Superior to task-specific models in flexibility
-    \item Better than universal models for novel classes
-    \item More efficient than interactive methods
-    \item Improved over existing ICL approaches
-\end{itemize}
+The paper effectively positions Iris within the competitive landscape by highlighting distinct advantages across multiple dimensions. Compared to traditional task-specific models like nnUNet, Iris offers superior flexibility by eliminating the need for retraining when encountering new anatomical structures or imaging protocols. Against universal models, Iris demonstrates better novel class performance through its in-context learning capabilities. Relative to interactive methods like SAM variants, Iris provides more efficient inference through decoupled task encoding. Compared to existing in-context learning approaches, Iris achieves significant computational improvements while maintaining competitive segmentation quality.
 
-\subsubsection{Advantages/Disadvantages Discussion}
-\strength{Lorem ipsum dolor sit amet, clear articulation of advantages over existing methods.}
+This multi-dimensional comparison strategy effectively demonstrates that Iris addresses limitations present across different methodological paradigms rather than simply optimizing within a single approach category.
 
-Advantages highlighted:
-\begin{itemize}
-    \item Lorem ipsum dolor sit amet
-    \item Consectetur adipiscing elit
-    \item Sed do eiusmod tempor
-\end{itemize}
+\subsubsection{Advantages and Disadvantages Discussion}
+The paper clearly articulates specific advantages of the Iris framework, including one-shot learning capabilities without fine-tuning, superior generalization performance on novel anatomical classes, and computational efficiency through decoupled task encoding. The quantitative evidence supporting these claims includes achieving 28.28% Dice score on MSD Pancreas Tumor compared to 11.97% for the best competing method, demonstrating substantial improvement in challenging novel class scenarios.
 
-Disadvantages acknowledged:
-\begin{itemize}
-    \item Lorem ipsum dolor sit amet
-    \item \weakness{Limited discussion of when other methods might be preferable}
-\end{itemize}
+However, the discussion could benefit from more explicit acknowledgment of scenarios where alternative approaches might be preferable. Limited discussion appears regarding when other methods might be preferable, such as scenarios where extensive labeled training data is available for specific tasks or when computational resources are not constrained.
 
 \subsubsection{Future Work Implications}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Potential future directions:
-\begin{enumerate}
-    \item Lorem ipsum dolor sit amet
-    \item Consectetur adipiscing elit
-    \item Sed do eiusmod tempor incididunt
-\end{enumerate}
+The Iris framework opens several promising research directions that extend beyond the current implementation. Integration with real-time clinical workflows represents a significant application opportunity, particularly given the demonstrated computational efficiency advantages. Enhancement of pretraining strategies using larger unlabeled medical imaging datasets could further improve feature representation quality. Development of interactive prompting capabilities in conjunction with foundation models like MedSAM could enable dynamic, clinician-driven segmentation workflows that combine automated efficiency with expert guidance.
 
 \subsection{Broader Impact}
 \subsubsection{Clinical Applicability}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Clinical relevance:
-\begin{itemize}
-    \item \strength{Potential for rapid adaptation to new imaging protocols}
-    \item Lorem ipsum dolor sit amet
-    \item Consectetur adipiscing elit
-\end{itemize}
+The practical clinical relevance of Iris extends across multiple healthcare applications where rapid adaptation capabilities provide substantial value. The framework demonstrates particular potential for rapid adaptation to new imaging protocols, enabling healthcare institutions to deploy segmentation capabilities across diverse scanner configurations and acquisition parameters without extensive retraining requirements. This flexibility addresses a critical challenge in clinical deployment where imaging protocols vary significantly across institutions and evolve continuously with technological advances.
+
+The one-shot learning capability enables rapid deployment for new anatomical targets, which proves particularly valuable in specialized medical applications where limited labeled training data is available but expert annotations can provide reference examples for in-context learning.
 
 \subsubsection{Potential Real-world Deployment Challenges}
-\weakness{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Limited discussion of:}
-\begin{itemize}
-    \item Regulatory approval challenges
-    \item Integration with clinical workflows
-    \item Computational resource requirements in hospitals
-\end{itemize}
+The paper provides limited discussion of significant deployment challenges that could impact clinical adoption, including regulatory approval processes that require extensive validation studies, integration complexity with existing clinical workflows and picture archiving systems, and computational resource requirements in typical hospital environments where high-performance GPU infrastructure may not be readily available.
+
+Additional considerations include model interpretability requirements for clinical decision support, validation across diverse patient populations to ensure equitable performance, and establishment of quality assurance protocols for ongoing monitoring of segmentation accuracy in production environments.
 
 \subsubsection{Ethical Considerations}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. \suggestion{Include discussion of potential biases and fairness across different patient populations.}
+The discussion would benefit from explicit analysis of potential biases and fairness considerations across different patient populations, particularly given the diversity of training datasets and the importance of equitable healthcare AI performance across demographic groups. Consideration of data privacy implications for in-context learning approaches, where reference examples may contain sensitive patient information, represents another important ethical dimension that warrants discussion.

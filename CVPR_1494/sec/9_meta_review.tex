@@ -3,74 +3,64 @@
 % Lead Author: Phaninder Reddy Masapeta (Team Lead)
 
 \subsection{Consistency Check Across Reviews}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. After integrating all team members' reviews, we identified the following consensus points:
+After conducting comprehensive individual reviews and integrating perspectives from all team members, we have identified clear consensus points and areas requiring focused discussion. The review team demonstrates strong agreement on fundamental aspects of the work while acknowledging nuanced differences in interpretation regarding specific technical contributions and implementation details.
 
 \subsubsection{Areas of Agreement}
-\begin{itemize}
-    \item \textbf{Technical Innovation:} All reviewers agree Lorem ipsum dolor sit amet
-    \item \textbf{Experimental Scope:} Lorem ipsum comprehensive evaluation
-    \item \textbf{Presentation Quality:} Generally well-written with minor issues
-    \item \textbf{Computational Efficiency:} Lorem ipsum impressive improvements
-\end{itemize}
+The review team reached unanimous consensus on several critical aspects of the Iris framework and its contribution to medical image segmentation research. \textbf{Technical Innovation} receives consistent recognition across all reviewers, with universal agreement that the decoupled task encoding architecture represents genuine methodological advancement that addresses computational bottlenecks in existing in-context learning approaches.
+
+\textbf{Experimental Scope} demonstrates comprehensive coverage that all reviewers acknowledge as thorough and appropriate for validating universal segmentation claims. The evaluation across twelve diverse medical imaging datasets spanning multiple modalities and anatomical regions provides convincing evidence of the method's broad applicability.
+
+\textbf{Presentation Quality} receives generally positive assessment, with reviewers noting clear technical exposition and effective visual communication of complex architectural concepts. While minor formatting and clarity issues exist, the overall manuscript organization and writing quality meet publication standards.
+
+\textbf{Computational Efficiency} achievements generate consistent praise across the review team, with universal recognition of the practical significance of reducing inference time from 659.4 seconds to 2.0 seconds compared to UniverSeg while maintaining competitive segmentation accuracy.
 
 \subsubsection{Areas of Disagreement}
-\begin{itemize}
-    \item \textbf{Novelty Assessment:} Lorem ipsum dolor sit amet
-    \begin{itemize}
-        \item Member 1: Significant architectural innovation
-        \item Member 4: Incremental improvement over UniverSeg
-    \end{itemize}
-    \item \textbf{Clinical Impact:} Lorem ipsum varying opinions on practical applicability
-    \item \textbf{Experimental Rigor:} Lorem ipsum dolor sit amet about statistical testing
-\end{itemize}
+The review team identified several areas where individual perspectives diverge, requiring careful synthesis to reach balanced conclusions. \textbf{Novelty Assessment} reveals the most significant divergence in reviewer opinions, with architectural specialists emphasizing the fundamental innovation of decoupled task encoding, while literature review specialists view the contributions as incremental improvements over existing UniverSeg approaches.
+
+\textbf{Clinical Impact} generates varying assessments of practical applicability, with some reviewers emphasizing the transformative potential for clinical workflows while others express concern about deployment challenges and limited validation in real clinical environments.
+
+\textbf{Experimental Rigor} creates division regarding the adequacy of statistical validation, with methodology specialists emphasizing the critical need for significance testing while results specialists focus on the consistency of performance improvements across diverse evaluation scenarios.
 
 \subsection{Consensus Building on Major Points}
 \subsubsection{Strengths - Team Consensus}
-\begin{enumerate}
-    \item \textbf{Efficiency:} Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    \item \textbf{Flexibility:} Multiple inference strategies provide practical value
-    \item \textbf{Performance:} Lorem ipsum competitive with task-specific models
-    \item \textbf{Innovation:} Task encoding decoupling is genuinely novel
-\end{enumerate}
+The integrated review identifies four primary strengths that receive unanimous team endorsement. \textbf{Computational Efficiency} represents the most significant practical advancement, with the decoupled architecture enabling dramatic improvements in inference speed without sacrificing segmentation quality. This efficiency gain addresses a fundamental limitation that has prevented clinical deployment of previous in-context learning approaches.
+
+\textbf{Methodological Flexibility} through multiple inference strategies provides genuine practical value for diverse clinical deployment scenarios. The framework's support for one-shot inference, context ensemble, object-level retrieval, and in-context tuning enables adaptation to varying resource constraints and accuracy requirements encountered in clinical practice.
+
+\textbf{Competitive Performance} across in-distribution tasks demonstrates that the proposed approach achieves approximately 84.52\% average Dice score, matching or exceeding task-specific models while providing superior flexibility for novel class adaptation.
+
+\textbf{Architectural Innovation} in task encoding decoupling represents genuine technical contribution that advances the state of in-context learning for medical image segmentation beyond existing approaches.
 
 \subsubsection{Weaknesses - Team Consensus}
-\begin{enumerate}
-    \item \textbf{Novel Class Performance:} Lorem ipsum dolor sit amet
-    \item \textbf{Statistical Validation:} Lack of significance testing
-    \item \textbf{Code Availability:} Lorem ipsum not provided
-    \item \textbf{Limited Analysis:} Lorem ipsum failure modes underexplored
-\end{enumerate}
+The review team identified four critical weaknesses that require substantial attention in revision. \textbf{Novel Class Performance Limitations} represent the most concerning technical issue, with the 28.28\% Dice score on MSD Pancreas Tumor raising fundamental questions about the method's ability to handle challenging anatomical structures with high inter-patient variability.
+
+\textbf{Statistical Validation Deficiency} constitutes a methodological gap that undermines confidence in reported performance improvements and limits the reliability of comparative analysis against baseline approaches.
+
+\textbf{Code Availability Absence} creates significant barriers to reproducibility and community adoption, preventing independent validation of claimed results and limiting practical impact within the research community.
+
+\textbf{Limited Failure Analysis} constrains understanding of method limitations and provides insufficient guidance for appropriate application contexts, particularly regarding when alternative approaches might be preferable.
 
 \subsection{Final Recommendation with Justification}
 \subsubsection{Recommendation: Major Revision}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Based on our comprehensive review, we recommend \textbf{Major Revision} for the following reasons:
+Based on comprehensive team review and careful synthesis of individual assessments, we recommend \textbf{Major Revision} for this submission. This recommendation reflects the work's substantial technical merit balanced against critical methodological gaps that must be addressed for publication at a premier venue.
 
-\textbf{Positive Aspects:}
-\begin{itemize}
-    \item Lorem ipsum dolor sit amet - genuine technical contribution
-    \item Consectetur adipiscing elit - strong experimental validation
-    \item Sed do eiusmod tempor - practical clinical relevance
-    \item Lorem ipsum - well-executed presentation
-\end{itemize}
+The core technical contributions demonstrate genuine innovation and practical value for medical image segmentation. The decoupled task encoding architecture addresses fundamental computational limitations in existing approaches while maintaining competitive segmentation performance. The comprehensive experimental evaluation across diverse datasets provides convincing evidence of broad applicability and robustness.
 
-\textbf{Required Improvements:}
-\begin{enumerate}
-    \item \textbf{Statistical Analysis:} Lorem ipsum dolor sit amet
-    \item \textbf{Code Release:} Essential for reproducibility
-    \item \textbf{Failure Analysis:} Lorem ipsum deeper investigation needed
-    \item \textbf{Novel Class Performance:} Lorem ipsum address limitations
-\end{enumerate}
+However, several critical deficiencies require substantial attention before the work achieves publication readiness. The absence of statistical validation undermines the reliability of performance claims, while missing code availability prevents independent verification and limits community impact. The incomplete analysis of failure modes constrains practical applicability guidance and limits understanding of method boundaries.
+
+\textbf{Required Improvements encompass four essential areas.} Statistical analysis implementation through paired t-tests or equivalent significance testing would establish confidence in reported performance improvements. Code repository release with comprehensive documentation would enable reproducibility and community adoption. Failure analysis expansion would provide essential guidance regarding appropriate application contexts and method limitations. Novel class performance investigation would address concerns about the method's ability to handle challenging anatomical structures.
 
 \subsubsection{Path to Acceptance}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. To achieve acceptance, the authors should:
-\begin{enumerate}
-    \item Address all major technical concerns raised
-    \item Lorem ipsum dolor sit amet statistical validation
-    \item Provide code and detailed implementation
-    \item Lorem ipsum expand discussion of limitations
-    \item Include additional experiments suggested
-\end{enumerate}
+To achieve acceptance at CVPR 2025, the authors should systematically address all major technical concerns identified across the comprehensive review process. Statistical validation implementation represents the highest priority requirement, establishing confidence intervals and significance levels for all reported performance comparisons.
+
+Code release with detailed implementation guidelines, pre-trained model weights, and example usage scripts would demonstrate commitment to open science and enable community validation of results. Comprehensive failure analysis including specific guidance about when alternative methods might be preferable would enhance practical utility and support informed deployment decisions.
+
+Expansion of novel class evaluation with additional challenging datasets and detailed analysis of performance limitations would address concerns about claimed universality. Integration of suggested ablation studies would strengthen understanding of architectural component contributions and guide future methodological development.
 
 \subsubsection{Final Remarks}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. This work represents a valuable contribution to medical image segmentation. With the requested revisions, Lorem ipsum dolor sit amet would be suitable for publication at CVPR 2025. The team unanimously agrees that the core ideas are sound and the execution is generally strong, requiring primarily additional validation and clarification rather than fundamental changes to the approach.
+This work represents valuable contribution to medical image segmentation research that advances both theoretical understanding and practical capabilities for clinical applications. The core innovations in decoupled task encoding and efficient in-context learning address genuine limitations in existing approaches while demonstrating clear computational advantages.
+
+With the requested revisions addressing statistical validation, code availability, and failure analysis, this work would achieve publication readiness for CVPR 2025. The review team unanimously agrees that the fundamental approach demonstrates soundness and the experimental execution shows generally strong methodology, requiring primarily additional validation and documentation rather than fundamental changes to the core technical approach.
+
+The potential impact for medical imaging applications justifies the revision effort, as successful implementation of suggested improvements would create a valuable resource for the research community while advancing the state of universal medical image segmentation toward practical clinical deployment.
