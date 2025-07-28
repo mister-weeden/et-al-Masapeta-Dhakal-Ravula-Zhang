@@ -1,90 +1,42 @@
-% CVPR 2025 Submission #1494. CONFIDENTIAL REVIEW COPY. DO NOT DISTRIBUTE.
+% CVPR 2025 Paper Template; see https://github.com/cvpr-org/author-kit
 
 \documentclass[10pt,twocolumn,letterpaper]{article}
-
+\PassOptionsToPackage{table,dvipsnames}{xcolor}
 %%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
-% \usepackage[review]{cvpr}      % To produce the REVIEW version
 \usepackage{cvpr}              % To produce the CAMERA-READY version
+%\usepackage[review]{cvpr}      % To produce the REVIEW version
 %\usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
 
-% Include other packages here, before hyperref.
-\usepackage{times}
-\usepackage{epsfig}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{xcolor}
-\usepackage{soul}
-\usepackage{balance} % For balancing columns on last page
+% Import additional packages in the preamble file, before hyperref
+\input{preamble}
 
 % It is strongly recommended to use hyperref, especially for the review version.
 % hyperref with option pagebackref eases the reviewers' job.
-% Please disable hyperref *only* if you encounter grave issues, e.g. with the
-% file validation for the camera-ready version.
+% Please disable hyperref *only* if you encounter grave issues, 
+% e.g. with the file validation for the camera-ready version.
 %
-% If you comment hyperref and then uncomment it, you should delete
-% ReviewTempalte.aux before re-running LaTeX.
-% (Or just hit 'q' on the first LaTeX run, let it finish, and you
-%  should be clear).
-\usepackage[pagebackref,breaklinks,colorlinks]{hyperref}
-
-% Support for easy cross-referencing
-\usepackage[capitalize]{cleveref}
-\crefname{section}{Sec.}{Secs.}
-\Crefname{section}{Section}{Sections}
-\Crefname{table}{Table}{Tables}
-\crefname{table}{Tab.}{Tabs.}
-
-% Define colors for different review aspects
-\definecolor{strength}{RGB}{0,128,0}
-\definecolor{weakness}{RGB}{178,34,34}
-\definecolor{suggestion}{RGB}{0,0,139}
-
-% Custom commands for review annotations
-\newcommand{\strength}[1]{\textcolor{strength}{\textbf{[Strength] }#1}}
-\newcommand{\weakness}[1]{\textcolor{weakness}{\textbf{[Weakness] }#1}}
-\newcommand{\suggestion}[1]{\textcolor{suggestion}{\textbf{[Suggestion] }#1}}
+% If you comment hyperref and then uncomment it, you should delete *.aux before re-running LaTeX.
+% (Or just hit 'q' on the first LaTeX run, let it finish, and you should be clear).
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
 
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
-\def\cvprPaperID{1494} % *** Enter the CVPR Paper ID here
+\def\paperID{***} % *** Enter the Paper ID here
 \def\confName{CVPR}
 \def\confYear{2025}
 
-% Define paperID for compatibility
-\def\paperID{\cvprPaperID}
-
 %%%%%%%%% TITLE - PLEASE UPDATE
 \title{Peer Review Report: Show and Segment: Universal Medical Image Segmentation via In-Context Learning}
+% Show to Segment: Towards Universal Medical Image Segmentation via In-Context Learning
+% Read Like a Radiologist: Universal Medical Segmentation through Reference Examples
 
-%%%%%%%%% AUTHORS - TEAM MEMBERS WITH CONTACT INFORMATION
-\author{Phaninder Reddy Masapeta (Team Lead)\\
-Texas Tech University\\
-Computer Science Department\\
-{\tt\small Phaninder.Masapeta@ttu.edu}
-\and
-Sriya Dhakal\\
-Texas Tech University\\
-Computer Science Department\\
-{\tt\small srdhakal@ttu.edu}
-\and
-Akhila Ravula\\
-Texas Tech University\\
-Computer Science Department\\
-{\tt\small akravula@ttu.edu}
-\and
-Zezheng Zhang\\
-Texas Tech University\\
-Computer Science Department\\
-{\tt\small zezzhang@ttu.edu}
-\and
-Scott Weeden\\
-Texas Tech University\\
-Computer Science Department\\
-{\tt\small sweeden@ttu.edu}
+%%%%%%%%% AUTHORS - PLEASE UPDATE
+\author{Phaninder Reddy Masapeta$^{1}$, Sriya Dhakal$^{1}$, Akhila Ravula$^{1}$, Zezheng Zhang$^{1}$, Scott Weeden$^{1}$\\\\
+$^1$Computer Science Department, Texas Tech University\vspace{-0em}
 }
 
 \begin{document}
-
+\maketitle
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}

@@ -6,7 +6,7 @@
     "**/.github": true,
     "**/.claude": true,
     "GUIDELINES": true,
-    "IEEE_1494": true
+    "IEEE_1494": false
   },
   "search.useIgnoreFiles": true,
   "explorer.excludeGitIgnore": true
