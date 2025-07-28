@@ -16,14 +16,15 @@ The 28.28% performance on MSD Pancreas raises concerns about the method's abilit
 The adaptation to completely unseen anatomical structures shows promising but limited results. MSD Pancreas Tumor performance at 28.28% proves challenging due to small lesion size and high variability. Pelvic performance at 69.03% demonstrates better results on larger, more structured anatomical regions.
 
 \subsubsection{Inference Strategy Performance Analysis}
-The paper presents comprehensive analysis of different inference strategies through detailed performance comparison across varying context sample percentages. Figure~\ref{fig:performance_comparison} demonstrates the effectiveness of four distinct inference approaches: Context Ensemble, Image-Level Retrieve, Object-Level Retrieve, and In-Context Tuning.
+The paper presents comprehensive analysis of different inference strategies through detailed performance comparison across varying context sample percentages. The analysis demonstrates the effectiveness of four distinct inference approaches: Context Ensemble, Image-Level Retrieve, Object-Level Retrieve, and In-Context Tuning.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.8\linewidth]{fig/performance_comparison.png}
-  \caption{Analysis of different inference strategies showing out-of-distribution performance across varying percentages of context samples. In-Context Tuning demonstrates superior performance scaling, reaching approximately 75.5\% Dice score, while other methods plateau around 72\% Dice score.}
-  \label{fig:performance_comparison}
-\end{figure}
+% Figure reference temporarily commented out for compilation
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{fig/performance_comparison.png}
+%   \caption{Analysis of different inference strategies showing out-of-distribution performance across varying percentages of context samples. In-Context Tuning demonstrates superior performance scaling, reaching approximately 75.5\% Dice score, while other methods plateau around 72\% Dice score.}
+%   \label{fig:performance_comparison}
+% \end{figure}
 
 The performance analysis reveals significant insights into the scalability and effectiveness of each inference strategy. In-Context Tuning shows remarkable performance improvement as the percentage of context samples increases, achieving approximately 75.5\% Dice score at full context utilization. This superior scaling behavior indicates that the method effectively leverages additional context information to enhance segmentation quality.
 
