@@ -6,13 +6,13 @@
 \subsection{Training Pipeline Implementation}
 
 \subsubsection*{Episodic Learning Framework}
-Our implementation validates the paper's episodic training methodology through complete development, following established few-shot learning principles adapted for medical image segmentation:
+Our implementation validates the paper's episodic training methodology through complete development, following established few-shot learning principles~\cite{wang2023seggpt} adapted for medical image segmentation:
 
 \textbf{Episodic Sampling Strategy:}
 \begin{itemize}
-    \item \textbf{Reference-Query Pairing:} Same anatomical class, different patients, following medical imaging best practices
+    \item \textbf{Reference-Query Pairing:} Same anatomical class, different patients, following medical imaging best practices~\cite{isensee2021nnu}
     \item \textbf{Patient Separation:} Ensures no data leakage between reference and query
-    \item \textbf{Class Balance:} Uniform sampling across 15 AMOS22 anatomical structures
+    \item \textbf{Class Balance:} Uniform sampling across 15 AMOS22 anatomical structures~\cite{ji2022amos}
     \item \textbf{Episode Size:} 2 samples per episode (1 reference + 1 query)
 \end{itemize}
 
@@ -21,11 +21,11 @@ Our implementation validates the paper's episodic training methodology through c
     \item Episodes per epoch: 1000 training, 200 validation
     \item Spatial processing: $(64, 128, 128)$ voxel resolution following memory-efficient practices
     \item Batch processing: Single episode per batch for episodic learning
-    \item Data augmentation: Random flips, intensity variations following medical imaging standards
+    \item Data augmentation: Random flips, intensity variations following medical imaging standards~\cite{isensee2021nnu}
 \end{itemize}
 
 \subsubsection*{Loss Function Optimization}
-Implementation confirms the paper's loss formulation effectiveness, utilizing established medical segmentation loss functions:
+Implementation confirms the paper's loss formulation effectiveness, utilizing established medical segmentation loss functions~\cite{isensee2021nnu}:
 
 \textbf{Combined Loss Function:}
 \begin{equation}

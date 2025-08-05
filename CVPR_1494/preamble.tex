@@ -1,16 +1,39 @@
 % Additional packages for the peer review document
 % Compatible with CVPR conference format
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}  % Use algpseudocode instead of algorithmic
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{epstopdf}
+\epstopdfsetup{update} % only regenerate pdf files when eps file is newer
+
+% Additional packages for peer review
 \usepackage{cite}
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
 \usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage{booktabs}
-\usepackage{multirow}
 \usepackage{array}
 \usepackage{listings}
 \usepackage{lipsum} % For lorem ipsum text if needed
 \usepackage{balance} % For column balancing
+
+%
+% --- inline annotations (simplified to avoid conflicts)
+%
+\newcommand{\red}[1]{{\color{red}#1}}
+\definecolor{lightgray}{rgb}{0.92, 0.92, 0.92}
+
 % Note: subcaption is already included by cvpr.sty, no need for subfigure
 
 % Define better colors for readability

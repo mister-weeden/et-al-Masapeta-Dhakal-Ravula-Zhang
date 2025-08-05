@@ -6,12 +6,12 @@
 \subsection{In-Context Learning Landscape Analysis}
 
 \subsubsection*{Foundation Models in Medical Imaging}
-Our implementation provides unique insights into the comparative advantages of IRIS over existing foundation models, particularly the Segment Anything Model (SAM) and its medical variants:
+Our implementation provides unique insights into the comparative advantages of IRIS over existing foundation models, particularly the Segment Anything Model (SAM)~\cite{kirillov2023segment} and its medical variants~\cite{cheng2023sam,wang2024sam}:
 
 \textbf{SAM and Medical Variants:}
 \begin{itemize}
-    \item \textbf{SAM-Med2D/3D:} Relies on positional prompts requiring user interaction
-    \item \textbf{IRIS Advantage:} Fully automated through reference examples, following in-context learning paradigms
+    \item \textbf{SAM-Med2D/3D~\cite{cheng2023sam,wang2024sam}:} Relies on positional prompts requiring user interaction
+    \item \textbf{IRIS Advantage:} Fully automated through reference examples, following in-context learning paradigms~\cite{wang2023seggpt}
     \item \textbf{Implementation Evidence:} Our validation shows 62\% Dice on novel classes without prompts
     \item \textbf{Clinical Relevance:} Eliminates need for expert annotation during inference
 \end{itemize}
@@ -21,13 +21,13 @@ Our implementation provides unique insights into the comparative advantages of I
     \item \textbf{Limitation:} Single-class processing requiring multiple forward passes
     \item \textbf{IRIS Innovation:} Multi-class processing in single forward pass
     \item \textbf{Efficiency Validation:} Our implementation demonstrates 2.5x speedup over sequential approaches
-    \item \textbf{Scalability:} Tested up to 15 simultaneous anatomical structures from AMOS dataset
+    \item \textbf{Scalability:} Tested up to 15 simultaneous anatomical structures from AMOS dataset~\cite{ji2022amos}
 \end{itemize}
 
 \subsubsection*{Few-Shot Learning Approaches}
-Implementation-based comparison with existing few-shot segmentation methods, particularly UniverSeg and SegGPT:
+Implementation-based comparison with existing few-shot segmentation methods, particularly UniverSeg~\cite{butoi2023universeg} and SegGPT~\cite{wang2023seggpt}:
 
-\textbf{UniverSeg Analysis:}
+\textbf{UniverSeg Analysis~\cite{butoi2023universeg}:}
 \begin{itemize}
     \item \textbf{Architecture:} 2D slice-based processing with separate class handling
     \item \textbf{IRIS Improvement:} Native 3D processing with unified multi-class architecture
