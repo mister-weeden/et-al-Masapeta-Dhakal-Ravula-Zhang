@@ -1,9 +1,9 @@
-\section{Specific Questions for Authors}
+\section*{Specific Questions for Authors}
 \label{sec:questions_authors}
 % Lead Authors: All Team Members
 % Phaninder Reddy Masapeta, Sriya Dhakal, Akhila Ravula, Zezheng Zhang, Scott Weeden
 
-\subsection{Clarification Requests}
+\subsection*{Clarification Requests}
 The review team requires detailed clarification on several critical aspects of the Iris implementation and methodology. First, regarding the task encoding module implementation, we need comprehensive understanding of how the module specifically handles scenarios where reference and query images exhibit significantly different fields of view or imaging parameters. Given that the framework demonstrates strong performance on AMOS and BCV datasets but struggles with CSI-fat (47.78% Dice), understanding the robustness mechanisms for domain variations would clarify the method's practical limitations and guide appropriate application contexts.
 
 Second, we require comprehensive details about the episodic training procedure mentioned in the methodology. Specifically, what sampling strategies are employed for selecting reference-query pairs during training, how is class balance maintained across the twelve diverse training datasets, and what measures prevent the model from overfitting to specific dataset characteristics during the 80,000 iteration training process.
@@ -14,7 +14,7 @@ Fourth, we require precise GPU memory requirements for training and inference ac
 
 Finally, based on the significant performance variations across datasets (from 86.75% on AMOS to 47.78% on CSI-fat), we need understanding of what specific anatomical structures, imaging characteristics, or domain shift scenarios Iris struggles with most significantly. Understanding these limitations would guide appropriate clinical deployment strategies and inform users about when alternative approaches might be preferable.
 
-\subsection{Additional Experiments Needed}
+\subsection*{Additional Experiments Needed}
 The current experimental evaluation requires several critical enhancements to establish publication readiness. Statistical significance validation represents the highest priority need, as the current evaluation lacks statistical significance testing, which undermines confidence in the reported performance improvements. We strongly recommend implementing paired t-tests or Wilcoxon signed-rank tests between Iris and baseline methods across all evaluated datasets. This statistical validation is essential for establishing the reliability of claimed improvements and supporting publication at a top-tier venue.
 
 Comprehensive ablation studies would strengthen understanding of architectural component contributions. These should include systematic evaluation of different numbers of query tokens in the contextual encoding module, analysis of the impact of reference image quality on task embedding effectiveness, assessment of different attention mechanisms within the transformer-based decoder, and investigation of alternative high-resolution processing strategies for preserving fine anatomical details.
@@ -25,7 +25,7 @@ Few-shot learning scalability assessment would complement the current evaluation
 
 Real-time clinical performance analysis would support deployment planning through comprehensive analysis of real-time performance characteristics relevant to clinical deployment. This should include frame rates for sequential volume processing, memory usage patterns during extended inference sessions, and performance degradation analysis under resource-constrained environments typical of clinical workstations.
 
-\subsection{Missing Information}
+\subsection*{Missing Information}
 Several critical information gaps must be addressed to ensure reproducibility and practical utility. Code repository and reproducibility represent fundamental requirements, as the absence of code significantly limits reproducibility and community adoption. The authors should provide a timeline for code release including detailed implementation guidelines, pre-trained model weights, and example usage scripts that would enable other researchers to reproduce the reported results and extend the methodology.
 
 Dataset split specifications require complete documentation including exact dataset split specifications with file lists, patient identifiers, and train/validation/test allocations for each of the twelve training datasets. This detailed information is essential for ensuring fair comparison with future methods and enabling precise reproduction of experimental conditions.

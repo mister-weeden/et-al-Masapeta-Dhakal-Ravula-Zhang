@@ -1,12 +1,11 @@
-\section{Executive Summary and Implementation Validation}
+\section*{Implementation Validation}
 \label{sec:abstract}
-% Lead Author: Phaninder Reddy Masapeta
-% Implementation Validation: Complete IRIS Framework
 
-\subsection{Paper Overview and Significance}
+
+\subsection*{Paper Overview and Significance}
 The paper "Show and Segment: Universal Medical Image Segmentation via In-Context Learning" presents IRIS, a novel framework for universal medical image segmentation that leverages in-context learning to segment anatomical structures using only reference examples. This approach addresses a critical challenge in medical imaging: the need for extensive fine-tuning when encountering new anatomical structures or imaging modalities, building upon established medical image segmentation methods~\cite{isensee2021nnu} and recent advances in universal segmentation~\cite{butoi2023universeg,wang2023seggpt}.
 
-\subsection{Implementation Validation Achievement}
+\subsection*{Implementation Validation Achievement}
 \textbf{Unprecedented Validation:} Our review team has conducted the first complete implementation of the IRIS framework, successfully validating all technical claims through systematic development across five implementation phases:
 
 \begin{itemize}
@@ -21,7 +20,7 @@ The paper "Show and Segment: Universal Medical Image Segmentation via In-Context
     \item \textbf{Phase 5 - Evaluation Framework:} Developed comprehensive validation system with novel class testing, cross-dataset generalization evaluation across multiple datasets, and systematic paper claims verification.
 \end{itemize}
 
-\subsection{Comprehensive Claims Validation Results}
+\subsection*{Comprehensive Claims Validation Results}
 \textbf{100\% Success Rate:} All six key paper claims have been systematically validated through our implementation:
 
 \begin{table}[h]
@@ -43,7 +42,7 @@ Task Reusability & Yes & \textbf{100\%} & \textcolor{validatedgreen}{\checkmark}
 \label{tab:claims_validation}
 \end{table}
 
-\subsection{AMOS22 Dataset Integration}
+\subsection*{AMOS22 Dataset Integration}
 \textbf{Complete Dataset Support:} Our implementation fully integrates the AMOS22 dataset with:
 \begin{itemize}
     \item 15 anatomical structures: spleen, right\_kidney, left\_kidney, gallbladder, esophagus, liver, stomach, aorta, inferior\_vena\_cava, portal\_vein\_splenic\_vein, pancreas, right\_adrenal\_gland, left\_adrenal\_gland, duodenum, bladder
@@ -52,7 +51,7 @@ Task Reusability & Yes & \textbf{100\%} & \textcolor{validatedgreen}{\checkmark}
     \item Binary decomposition for multi-class training scenarios
 \end{itemize}
 
-\subsection{Technical Soundness Confirmation}
+\subsection*{Technical Soundness Confirmation}
 Our implementation validates the paper's technical contributions:
 \begin{itemize}
     \item \textbf{Architecture Feasibility:} The proposed dual-path task encoding with 3D processing is implementable and effective
@@ -62,7 +61,7 @@ Our implementation validates the paper's technical contributions:
     \item \textbf{Novel Class Handling:} Unseen anatomical structures achieve 62.0\% Dice within paper's 28-69\% range
 \end{itemize}
 
-\subsection{Review Recommendation}
+\subsection*{Review Recommendation}
 \textbf{Strong Accept with Implementation Evidence:} Based on our comprehensive implementation validation, we recommend \textbf{Strong Accept}. The paper presents a technically sound, novel, and reproducible approach to universal medical image segmentation. Our implementation demonstrates:
 \begin{itemize}
     \item Complete technical feasibility across all claimed components

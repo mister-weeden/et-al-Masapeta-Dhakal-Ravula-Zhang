@@ -1,9 +1,9 @@
-\section{Results Validation with Comprehensive Implementation Testing}
+\section*{Results Validation with Comprehensive Implementation Testing}
 \label{sec:results_validation}
 % Lead Author: Akhila Ravula
 % Implementation: Complete Paper Claims Validation
 
-\subsection{Systematic Claims Validation Overview}
+\subsection*{Systematic Claims Validation Overview}
 
 Our implementation provides unprecedented validation of all paper claims through systematic testing, following established evaluation protocols in medical image segmentation~\cite{isensee2021nnu} and in-context learning~\cite{wang2023seggpt,butoi2023universeg}. We achieved \textbf{100\% validation success rate} across all six key claims, with quantitative results matching or exceeding paper's reported performance ranges.
 
@@ -16,7 +16,7 @@ Our implementation provides unprecedented validation of all paper claims through
     \item \textbf{Evaluation Metrics:} Dice score, IoU, efficiency measurements, consistency checks following established medical imaging evaluation protocols
 \end{itemize}
 
-\subsection{Claim 1: Novel Class Performance Validation}
+\subsection*{Claim 1: Novel Class Performance Validation}
 
 \subsubsection*{Implementation Results}
 \textbf{Paper Claim:} 28-69\% Dice on unseen anatomical structures \\
@@ -61,7 +61,7 @@ Lung & 66.2\% & ±0.7\% & 3 & \textcolor{validatedgreen}{\checkmark} \\
     \item \textbf{Validation Time:} 1.16 seconds for complete novel class testing
 \end{itemize}
 
-\subsection{Claim 2: Cross-Dataset Generalization Validation}
+\subsection*{Claim 2: Cross-Dataset Generalization Validation}
 
 \subsubsection*{Implementation Results}
 \textbf{Paper Claim:} 82-86\% Dice on out-of-distribution data \\
@@ -102,7 +102,7 @@ Kidney & AMOS & BCV & 82.5\% \\
     \item \textbf{Population Differences:} Different patient demographic simulation
 \end{itemize}
 
-\subsection{Claim 3: In-Distribution Performance Validation}
+\subsection*{Claim 3: In-Distribution Performance Validation}
 
 \subsubsection*{Implementation Results}
 \textbf{Paper Claim:} 89.56\% Dice on training distribution \\
@@ -136,7 +136,7 @@ Heart & 88.7\% & 3 & Excellent \\
     \item Consistent with expected in-context learning behavior
 \end{itemize}
 
-\subsection{Claim 4: In-Context Learning Validation}
+\subsection*{Claim 4: In-Context Learning Validation}
 
 \subsubsection*{Implementation Results}
 \textbf{Paper Claim:} No fine-tuning required during inference \\
@@ -168,7 +168,7 @@ No Weight Updates & Verified & \textcolor{validatedgreen}{\checkmark} \\
     \item \textbf{Consistency:} Identical inputs produce identical embeddings (diff $<10^{-8}$)
 \end{itemize}
 
-\subsection{Claim 5: Multi-Class Efficiency Validation}
+\subsection*{Claim 5: Multi-Class Efficiency Validation}
 
 \subsubsection*{Implementation Results}
 \textbf{Paper Claim:} Single forward pass more efficient than sequential \\
@@ -200,7 +200,7 @@ Sequential & 0.0344 & 3 & Baseline \\
     \item Memory efficiency: 68.7\% reduction through embedding reuse
 \end{itemize}
 
-\subsection{Claim 6: Task Embedding Reusability Validation}
+\subsection*{Claim 6: Task Embedding Reusability Validation}
 
 \subsubsection*{Implementation Results}
 \textbf{Paper Claim:} Task embeddings reusable across multiple queries \\
@@ -232,7 +232,7 @@ Memory Efficiency & High & High & \textcolor{validatedgreen}{\checkmark} \\
     \item Enables efficient deployment in clinical workflows
 \end{itemize}
 
-\subsection{Statistical Significance Analysis}
+\subsection*{Statistical Significance Analysis}
 
 \subsubsection*{Validation Robustness}
 \textbf{Statistical Measures:}
@@ -259,7 +259,7 @@ Memory Efficiency & High & High & \textcolor{validatedgreen}{\checkmark} \\
     \item Reproducible results with documented methodology
 \end{itemize}
 
-\subsection{Comparative Analysis with Paper Claims}
+\subsection*{Comparative Analysis with Paper Claims}
 
 \subsubsection*{Performance Summary}
 \begin{table}[h]

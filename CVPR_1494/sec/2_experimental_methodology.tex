@@ -1,9 +1,9 @@
-\section{Experimental Methodology with Implementation Validation}
+\section*{Experimental Methodology with Implementation Validation}
 \label{sec:experimental_methodology}
 % Lead Author: Sriya Dhakal
 % Implementation Validation: Training Pipeline and Evaluation Framework
 
-\subsection{Training Pipeline Implementation}
+\subsection*{Training Pipeline Implementation}
 
 \subsubsection*{Episodic Learning Framework}
 Our implementation validates the paper's episodic training methodology through complete development, following established few-shot learning principles~\cite{wang2023seggpt} adapted for medical image segmentation:
@@ -47,7 +47,7 @@ with smoothing factor $\epsilon = 10^{-5}$ for numerical stability.
     \item Convergence: Stable training across 100+ epochs
 \end{itemize}
 
-\subsection{Dataset Integration and Validation}
+\subsection*{Dataset Integration and Validation}
 
 \subsubsection*{AMOS22 Dataset Implementation}
 Complete integration of the primary dataset validates experimental setup:
@@ -108,7 +108,7 @@ Implementation extends beyond AMOS22 to validate multi-dataset claims:
     \item Confirms robust cross-institutional performance
 \end{itemize}
 
-\subsection{Evaluation Framework Implementation}
+\subsection*{Evaluation Framework Implementation}
 
 \subsubsection*{Comprehensive Metrics Suite}
 Our implementation provides extensive evaluation beyond paper's reported metrics:
@@ -160,7 +160,7 @@ Lung & 66.2\% & ±0.7\% & \textcolor{validatedgreen}{Pass} \\
 \label{tab:novel_class_results}
 \end{table}
 
-\subsection{Cross-Dataset Generalization Testing}
+\subsection*{Cross-Dataset Generalization Testing}
 
 \subsubsection*{Generalization Protocol Implementation}
 Systematic validation of cross-dataset performance claims:
@@ -200,7 +200,7 @@ Testing on training distribution confirms baseline performance:
     \item \textbf{Status:} Within acceptable tolerance for synthetic validation
 \end{itemize}
 
-\subsection{Computational Efficiency Analysis}
+\subsection*{Computational Efficiency Analysis}
 
 \subsubsection*{Multi-Class Efficiency Validation}
 Implementation confirms computational advantages claimed in paper:
@@ -221,7 +221,7 @@ Implementation confirms computational advantages claimed in paper:
     \item Efficient task embedding storage and retrieval
 \end{itemize}
 
-\subsection{Statistical Validation Framework}
+\subsection*{Statistical Validation Framework}
 
 \subsubsection*{Reproducibility Testing}
 Implementation ensures consistent results across multiple runs:
