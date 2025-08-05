@@ -21,11 +21,11 @@ Our implementation validates the paper's episodic training methodology through c
     \item Episodes per epoch: 1000 training, 200 validation
     \item Spatial processing: $(64, 128, 128)$ voxel resolution following memory-efficient practices
     \item Batch processing: Single episode per batch for episodic learning
-    \item Data augmentation: Random flips, intensity variations following medical imaging standards~\cite{isensee2021nnu}
+    \item Data augmentation: Random flips, intensity variations following medical imaging standards
 \end{itemize}
 
 \subsubsection*{Loss Function Optimization}
-Implementation confirms the paper's loss formulation effectiveness, utilizing established medical segmentation loss functions~\cite{isensee2021nnu}:
+Implementation confirms the paper's loss formulation effectiveness, utilizing established medical segmentation loss functions:
 
 \textbf{Combined Loss Function:}
 \begin{equation}

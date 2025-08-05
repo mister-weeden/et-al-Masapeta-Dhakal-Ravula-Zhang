@@ -9,22 +9,22 @@ Our complete implementation reveals the sophistication and effectiveness of the 
 
 \textbf{Dual-Path Architecture Validation:}
 \begin{itemize}
-    \item \textbf{Foreground Path Implementation:} Successfully processes high-resolution masks through adaptive interpolation, maintaining fine anatomical details critical for medical segmentation~\cite{isensee2021nnu}
+    \item \textbf{Foreground Path Implementation:} Successfully processes high-resolution masks through adaptive interpolation, maintaining fine anatomical details critical for medical segmentation
     \item \textbf{Context Path Innovation:} Custom 3D PixelShuffle implementation enables memory-efficient processing of large medical volumes, following established practices in 3D medical imaging~\cite{chen2019med3d}
-    \item \textbf{Cross-Attention Integration:} Multi-head attention (8 heads) effectively combines spatial features with task embeddings, utilizing transformer architectures~\cite{dosovitskiy2020image,hatamizadeh2022swin}
+    \item \textbf{Cross-Attention Integration:} Multi-head attention (8 heads) effectively combines spatial features with task embeddings, utilizing transformer architectures~\cite{hatamizadeh2022swin}
     \item \textbf{Performance Impact:} Ablation studies show 15\% degradation without foreground path, 23\% without context path
 \end{itemize}
 
 \textbf{Implementation Challenges and Solutions:}
 \begin{itemize}
     \item \textbf{3D PixelShuffle Challenge:} PyTorch lacks native 3D PixelShuffle; we implemented custom operations with mathematical formulation: $(B, C \times r^3, D, H, W) \rightarrow (B, C, D \times r, H \times r, W \times r)$
-    \item \textbf{Memory Management:} Implemented sliding window processing for volumes $>256^3$ voxels, following established practices in medical imaging~\cite{isensee2021nnu}
+    \item \textbf{Memory Management:} Implemented sliding window processing for volumes $>256^3$ voxels, following established practices in medical imaging
     \item \textbf{Numerical Stability:} Added epsilon terms ($10^{-5}$) in normalization and pooling operations
     \item \textbf{Channel Alignment:} Careful tracking of channel dimensions through pixel shuffle operations
 \end{itemize}
 
 \subsubsection*{3D UNet Architecture Implementation}
-Complete implementation validates the architectural design choices, building upon the proven U-Net architecture~\cite{ronneberger2015u} adapted for 3D medical imaging~\cite{chen2019med3d}:
+Complete implementation validates the architectural design choices, building upon the proven U-Net architecture~\cite{ronneberger2015u} adapted for 3D medical imaging:
 
 \textbf{Encoder Implementation Details:}
 \begin{itemize}

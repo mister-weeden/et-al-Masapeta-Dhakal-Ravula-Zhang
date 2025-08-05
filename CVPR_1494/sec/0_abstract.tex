@@ -4,26 +4,25 @@
 % Implementation Validation: Complete IRIS Framework
 
 \subsection{Paper Overview and Significance}
-The paper "Show and Segment: Universal Medical Image Segmentation via In-Context Learning" presents IRIS, a novel framework for universal medical image segmentation that leverages in-context learning to segment anatomical structures using only reference examples. This approach addresses a critical challenge in medical imaging: the need for extensive fine-tuning when encountering new anatomical structures or imaging modalities, building upon recent advances in universal segmentation~\cite{butoi2023universeg,wang2023seggpt} 
-and foundation models~\cite{kirillov2023segment}.
+The paper "Show and Segment: Universal Medical Image Segmentation via In-Context Learning" presents IRIS, a novel framework for universal medical image segmentation that leverages in-context learning to segment anatomical structures using only reference examples. This approach addresses a critical challenge in medical imaging: the need for extensive fine-tuning when encountering new anatomical structures or imaging modalities, building upon established medical image segmentation methods~\cite{isensee2021nnu} and recent advances in universal segmentation~\cite{butoi2023universeg,wang2023seggpt}.
 
 \subsection{Implementation Validation Achievement}
-\textbf{Unprecedented Validation:} Our review team has conducted the first complete implementation of the IRIS framework, successfully validating all technical claims through systematic development across five implementation phases, following established medical imaging best practices~\cite{isensee2021nnu}:
+\textbf{Unprecedented Validation:} Our review team has conducted the first complete implementation of the IRIS framework, successfully validating all technical claims through systematic development across five implementation phases:
 
 \begin{itemize}
     \item \textbf{Phase 1 - Task Encoding Module:} Implemented dual-path architecture with 3D PixelShuffle operations, cross-attention integration, and learnable query tokens producing fixed-size embeddings of shape $(batch\_size, num\_tokens+1, embed\_dim)$.
     
-    \item \textbf{Phase 2 - Model Architecture:} Developed complete 3D UNet encoder with 4-stage residual blocks, query-based decoder with task-guided cross-attention, and end-to-end IRIS model integration (2.9M parameters).
+    \item \textbf{Phase 2 - Model Architecture:} Developed complete 3D UNet encoder~\cite{ronneberger2015u} with 4-stage residual blocks, query-based decoder with task-guided cross-attention, and end-to-end IRIS model integration (2.9M parameters).
     
     \item \textbf{Phase 3 - Training Pipeline:} Created episodic training framework with AMOS22 dataset~\cite{ji2022amos} integration supporting 15 anatomical structures, Dice + CrossEntropy loss optimization using LAMB optimizer~\cite{you2019large}, and multi-dataset episodic sampling.
     
     \item \textbf{Phase 4 - Inference Strategies:} Implemented memory bank for task embedding storage, sliding window processing for large volumes, multi-class simultaneous inference, and complete inference engine following established medical imaging protocols.
     
-    \item \textbf{Phase 5 - Evaluation Framework:} Developed comprehensive validation system with novel class testing, cross-dataset generalization evaluation across multiple datasets~\cite{bcv,heller2019kits19,bilic2019liver}, and systematic paper claims verification.
+    \item \textbf{Phase 5 - Evaluation Framework:} Developed comprehensive validation system with novel class testing, cross-dataset generalization evaluation across multiple datasets, and systematic paper claims verification.
 \end{itemize}
 
 \subsection{Comprehensive Claims Validation Results}
-\textbf{100\% Success Rate:} All six key paper claims have been systematically validated through our implementation, demonstrating performance competitive with state-of-the-art medical segmentation approaches~\cite{isensee2021nnu,liu2023clip}:
+\textbf{100\% Success Rate:} All six key paper claims have been systematically validated through our implementation:
 
 \begin{table}[h]
 \centering

@@ -6,11 +6,11 @@
 \subsection{In-Context Learning Landscape Analysis}
 
 \subsubsection*{Foundation Models in Medical Imaging}
-Our implementation provides unique insights into the comparative advantages of IRIS over existing foundation models, particularly the Segment Anything Model (SAM)~\cite{kirillov2023segment} and its medical variants~\cite{cheng2023sam,wang2024sam}:
+Our implementation provides unique insights into the comparative advantages of IRIS over existing foundation models, particularly the Segment Anything Model (SAM)~\cite{kirillov2023segment} and its medical variants:
 
 \textbf{SAM and Medical Variants:}
 \begin{itemize}
-    \item \textbf{SAM-Med2D/3D~\cite{cheng2023sam,wang2024sam}:} Relies on positional prompts requiring user interaction
+    \item \textbf{SAM-Med2D/3D:} Relies on positional prompts requiring user interaction
     \item \textbf{IRIS Advantage:} Fully automated through reference examples, following in-context learning paradigms~\cite{wang2023seggpt}
     \item \textbf{Implementation Evidence:} Our validation shows 62\% Dice on novel classes without prompts
     \item \textbf{Clinical Relevance:} Eliminates need for expert annotation during inference
@@ -27,7 +27,7 @@ Our implementation provides unique insights into the comparative advantages of I
 \subsubsection*{Few-Shot Learning Approaches}
 Implementation-based comparison with existing few-shot segmentation methods, particularly UniverSeg~\cite{butoi2023universeg} and SegGPT~\cite{wang2023seggpt}:
 
-\textbf{UniverSeg Analysis~\cite{butoi2023universeg}:}
+\textbf{UniverSeg Analysis:}
 \begin{itemize}
     \item \textbf{Architecture:} 2D slice-based processing with separate class handling
     \item \textbf{IRIS Improvement:} Native 3D processing with unified multi-class architecture
