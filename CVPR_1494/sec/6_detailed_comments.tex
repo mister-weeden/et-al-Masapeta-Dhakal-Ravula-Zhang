@@ -5,13 +5,13 @@
 \subsection{Architecture Implementation Deep Dive}
 
 \subsubsection*{Task Encoding Module Implementation Analysis}
-Our complete implementation reveals the sophistication and effectiveness of the proposed task encoding architecture, building upon established principles in medical image segmentation~\cite{ronneberger2015unet, milletari2016vnet} and modern attention mechanisms~\cite{vaswani2017attention}:
+Our complete implementation reveals the sophistication and effectiveness of the proposed task encoding architecture, building upon established principles in medical image segmentation~\cite{ronneberger2015unet,milletari2016vnet} and modern attention mechanisms~\cite{vaswani2017attention}:
 
 \textbf{Dual-Path Architecture Validation:}
 \begin{itemize}
     \item \textbf{Foreground Path Implementation:} Successfully processes high-resolution masks through adaptive interpolation, maintaining fine anatomical details critical for medical segmentation~\cite{isensee2021nnu}
     \item \textbf{Context Path Innovation:} Custom 3D PixelShuffle implementation enables memory-efficient processing of large medical volumes, following established practices in 3D medical imaging~\cite{milletari2016vnet}
-    \item \textbf{Cross-Attention Integration:} Multi-head attention (8 heads) effectively combines spatial features with task embeddings, utilizing transformer architectures~\cite{vaswani2017attention, dosovitskiy2020image}
+    \item \textbf{Cross-Attention Integration:} Multi-head attention (8 heads) effectively combines spatial features with task embeddings, utilizing transformer architectures~\cite{vaswani2017attention,dosovitskiy2020image}
     \item \textbf{Performance Impact:} Ablation studies show 15\% degradation without foreground path, 23\% without context path
 \end{itemize}
 
