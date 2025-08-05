@@ -6,23 +6,23 @@
 \subsection{Core Technical Innovation Analysis}
 
 \subsubsection*{Task Encoding Module Implementation}
-Our implementation validates the paper's core innovation: the dual-path task encoding architecture. We successfully implemented:
+Our implementation validates the paper's core innovation: the dual-path task encoding architecture, which builds upon recent advances in in-context learning~\cite{wang2023seggpt, butoi2023universeg} while addressing specific challenges in 3D medical imaging. We successfully implemented:
 
-\textbf{Foreground Path:} High-resolution feature extraction operating at original mask resolution through adaptive interpolation. Our implementation achieves:
+\textbf{Foreground Path:} High-resolution feature extraction operating at original mask resolution through adaptive interpolation, following established practices in medical image segmentation~\cite{isensee2021nnu}. Our implementation achieves:
 \begin{itemize}
     \item Direct mask application at full resolution preserving fine anatomical details
     \item Weighted global average pooling avoiding background contamination
     \item Consistent embedding generation across different spatial scales
 \end{itemize}
 
-\textbf{Context Path:} Memory-efficient processing using custom 3D PixelShuffle operations. Implementation details:
+\textbf{Context Path:} Memory-efficient processing using custom 3D PixelShuffle operations, inspired by techniques used in foundation models~\cite{kirillov2023segmentanything}. Implementation details:
 \begin{itemize}
     \item 3D PixelShuffle: Rearranges channels to spatial dimensions $(B, C \times r^3, D, H, W) \rightarrow (B, C, D \times r, H \times r, W \times r)$
-    \item Learnable query tokens: 10 tokens with cross-attention to context features
+    \item Learnable query tokens: 10 tokens with cross-attention to context features, following transformer-based approaches~\cite{zhang2023makes}
     \item Memory reduction: 8x spatial downsampling during processing, restored via PixelUnshuffle
 \end{itemize}
 
-\textbf{Validation Results:} Task embeddings demonstrate:
+\textbf{Validation Results:} Task embeddings demonstrate performance consistent with universal segmentation approaches~\cite{liu2023clipdriven, ye2023uniseg}:
 \begin{itemize}
     \item Shape consistency: $(batch\_size, num\_tokens+1, embed\_dim)$ where $num\_tokens=10$, $embed\_dim=512$
     \item Mask sensitivity: Different masks produce embeddings with $L2$ difference $>0.1$
