@@ -5,7 +5,7 @@
 
 \subsection{Core Technical Innovation Analysis}
 
-\subsubsection{Task Encoding Module Implementation}
+\subsubsection*{Task Encoding Module Implementation}
 Our implementation validates the paper's core innovation: the dual-path task encoding architecture. We successfully implemented:
 
 \textbf{Foreground Path:} High-resolution feature extraction operating at original mask resolution through adaptive interpolation. Our implementation achieves:
@@ -29,7 +29,7 @@ Our implementation validates the paper's core innovation: the dual-path task enc
     \item Reusability: Same reference produces identical embeddings (difference $<10^{-6}$)
 \end{itemize}
 
-\subsubsection{3D UNet Architecture with Query-Based Decoding}
+\subsubsection*{3D UNet Architecture with Query-Based Decoding}
 Our implementation confirms the architectural soundness through complete development:
 
 \textbf{Encoder Implementation:}
@@ -50,7 +50,7 @@ Our implementation confirms the architectural soundness through complete develop
 
 \subsection{Novel Algorithmic Contributions}
 
-\subsubsection{In-Context Learning for Medical Imaging}
+\subsubsection*{In-Context Learning for Medical Imaging}
 Our implementation validates the paper's claim of true in-context learning:
 
 \textbf{Parameter Immutability:} Verified through systematic testing:
@@ -67,7 +67,7 @@ Our implementation validates the paper's claim of true in-context learning:
     \item Cross-class references enable novel structure segmentation
 \end{itemize}
 
-\subsubsection{Multi-Class Efficiency Innovation}
+\subsubsection*{Multi-Class Efficiency Innovation}
 Implementation confirms computational advantages:
 
 \textbf{Performance Metrics:}
@@ -80,7 +80,7 @@ Implementation confirms computational advantages:
 
 \subsection{Implementation Architecture Analysis}
 
-\subsubsection{Memory Efficiency Validation}
+\subsubsection*{Memory Efficiency Validation}
 Our implementation demonstrates the paper's memory optimization claims:
 
 \textbf{3D PixelShuffle Operations:}
@@ -99,7 +99,7 @@ Our implementation demonstrates the paper's memory optimization claims:
     \item Memory footprint: $\sim$20KB per anatomical class
 \end{itemize}
 
-\subsubsection{Scalability Analysis}
+\subsubsection*{Scalability Analysis}
 Implementation testing reveals scalability characteristics:
 
 \textbf{Spatial Scalability:}
@@ -120,7 +120,7 @@ Implementation testing reveals scalability characteristics:
 
 \subsection{Comparison with Existing Approaches}
 
-\subsubsection{Quantitative Superiority Analysis}
+\subsubsection*{Quantitative Superiority Analysis}
 Our implementation enables direct comparison with existing methods:
 
 \textbf{vs. UniverSeg:}
@@ -146,7 +146,7 @@ Our implementation enables direct comparison with existing methods:
 
 \subsection{Technical Soundness Validation}
 
-\subsubsection{Mathematical Formulation Verification}
+\subsubsection*{Mathematical Formulation Verification}
 Implementation confirms mathematical correctness:
 
 \textbf{Cross-Attention Mechanism:}
@@ -161,7 +161,7 @@ T = [T_{fg}; T_{ctx}] \in \mathbb{R}^{(m+1) \times d}
 \end{equation}
 where $T_{fg}$ is foreground embedding, $T_{ctx}$ are context tokens, $m=10$ tokens, $d=512$ dimensions.
 
-\subsubsection{Architectural Design Validation}
+\subsubsection*{Architectural Design Validation}
 Implementation testing confirms design decisions:
 
 \textbf{Dual-Path Necessity:}

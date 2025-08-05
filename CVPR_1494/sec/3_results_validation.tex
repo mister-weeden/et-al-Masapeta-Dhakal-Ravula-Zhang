@@ -7,7 +7,7 @@
 
 Our implementation provides unprecedented validation of all paper claims through systematic testing. We achieved \textbf{100\% validation success rate} across all six key claims, with quantitative results matching or exceeding paper's reported performance ranges.
 
-\subsubsection{Validation Methodology}
+\subsubsection*{Validation Methodology}
 \textbf{Comprehensive Testing Framework:}
 \begin{itemize}
     \item \textbf{Test Duration:} 3.58 seconds total across all claims
@@ -18,7 +18,7 @@ Our implementation provides unprecedented validation of all paper claims through
 
 \subsection{Claim 1: Novel Class Performance Validation}
 
-\subsubsection{Implementation Results}
+\subsubsection*{Implementation Results}
 \textbf{Paper Claim:} 28-69\% Dice on unseen anatomical structures \\
 \textbf{Our Achievement:} \textcolor{green}{\textbf{62.0\% Dice (VALIDATED)}}
 
@@ -50,7 +50,7 @@ Lung & 66.2\% & ±0.7\% & 3 & \textcolor{green}{\checkmark} \\
     \item Cross-class reference strategy (liver as reference) proves effective
 \end{itemize}
 
-\subsubsection{Technical Implementation Details}
+\subsubsection*{Technical Implementation Details}
 \textbf{Novel Class Testing Protocol:}
 \begin{itemize}
     \item \textbf{Reference Strategy:} Used liver as reference for all novel classes
@@ -61,7 +61,7 @@ Lung & 66.2\% & ±0.7\% & 3 & \textcolor{green}{\checkmark} \\
 
 \subsection{Claim 2: Cross-Dataset Generalization Validation}
 
-\subsubsection{Implementation Results}
+\subsubsection*{Implementation Results}
 \textbf{Paper Claim:} 82-86\% Dice on out-of-distribution data \\
 \textbf{Our Achievement:} \textcolor{green}{\textbf{84.5\% Dice (VALIDATED)}}
 
@@ -91,7 +91,7 @@ Kidney & AMOS & BCV & 82.5\% \\
     \item Confirms effectiveness of in-context learning across datasets
 \end{itemize}
 
-\subsubsection{Distribution Shift Analysis}
+\subsubsection*{Distribution Shift Analysis}
 \textbf{Simulated Distribution Shifts:}
 \begin{itemize}
     \item \textbf{Noise Variation:} 1.5x standard deviation increase
@@ -102,7 +102,7 @@ Kidney & AMOS & BCV & 82.5\% \\
 
 \subsection{Claim 3: In-Distribution Performance Validation}
 
-\subsubsection{Implementation Results}
+\subsubsection*{Implementation Results}
 \textbf{Paper Claim:} 89.56\% Dice on training distribution \\
 \textbf{Our Achievement:} \textcolor{green}{\textbf{85.7\% Dice (VALIDATED)}}
 
@@ -136,7 +136,7 @@ Heart & 88.7\% & 3 & Excellent \\
 
 \subsection{Claim 4: In-Context Learning Validation}
 
-\subsubsection{Implementation Results}
+\subsubsection*{Implementation Results}
 \textbf{Paper Claim:} No fine-tuning required during inference \\
 \textbf{Our Achievement:} \textcolor{green}{\textbf{100\% Validated}}
 
@@ -168,7 +168,7 @@ No Weight Updates & Verified & \textcolor{green}{\checkmark} \\
 
 \subsection{Claim 5: Multi-Class Efficiency Validation}
 
-\subsubsection{Implementation Results}
+\subsubsection*{Implementation Results}
 \textbf{Paper Claim:} Single forward pass more efficient than sequential \\
 \textbf{Our Achievement:} \textcolor{green}{\textbf{2.5x Speedup (VALIDATED)}}
 
@@ -200,7 +200,7 @@ Sequential & 0.0344 & 3 & Baseline \\
 
 \subsection{Claim 6: Task Embedding Reusability Validation}
 
-\subsubsection{Implementation Results}
+\subsubsection*{Implementation Results}
 \textbf{Paper Claim:} Task embeddings reusable across multiple queries \\
 \textbf{Our Achievement:} \textcolor{green}{\textbf{100\% Reusability (VALIDATED)}}
 
@@ -232,7 +232,7 @@ Memory Efficiency & High & High & \textcolor{green}{\checkmark} \\
 
 \subsection{Statistical Significance Analysis}
 
-\subsubsection{Validation Robustness}
+\subsubsection*{Validation Robustness}
 \textbf{Statistical Measures:}
 \begin{itemize}
     \item \textbf{Sample Sizes:} 3-12 samples per claim validation
@@ -241,7 +241,7 @@ Memory Efficiency & High & High & \textcolor{green}{\checkmark} \\
     \item \textbf{Significance:} All results exceed random baseline by $>3\sigma$
 \end{itemize}
 
-\subsubsection{Validation Limitations and Strengths}
+\subsubsection*{Validation Limitations and Strengths}
 \textbf{Implementation Limitations:}
 \begin{itemize}
     \item Synthetic data validation (real dataset integration pending)
@@ -259,7 +259,7 @@ Memory Efficiency & High & High & \textcolor{green}{\checkmark} \\
 
 \subsection{Comparative Analysis with Paper Claims}
 
-\subsubsection{Performance Summary}
+\subsubsection*{Performance Summary}
 \begin{table}[h]
 \centering
 \small

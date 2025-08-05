@@ -16,7 +16,7 @@ For multi-class segmentation tasks, we decompose the problem into multiple binar
 \subsection{Iris Architecture}
 In Figure~\ref{fig:framework}, Iris introduces a novel in-context learning architecture that decouples task encoding from segmentation inference. This design comprises two key components: (1) a task encoding module that distills task-specific information from reference examples into compact task embeddings, and (2) a mask decoding module that leverages these task embeddings to guide query image segmentation.
 
-\subsubsection{Task Encoding Module}
+\subsubsection*{Task Encoding Module}
 Given a reference 3D image-label pair $(\boldsymbol{x}_s, \boldsymbol{y}_s) \in \mathbb{R}^{D \times H \times W} \times \{0,1\}^{D \times H \times W}$, our task encoding module extracts task representations through two parallel streams to extract comprehensive task representations.
 
 \noindent\textbf{Foreground feature encoding.} Medical data volumes present unique challenges in feature extraction due to the presence of fine boundary details and anatomical structures spanning only a tiny portion of voxels. Direct feature pooling at downsampled resolution can lead to information loss or complete disappearance of these critical regions of interest (ROIs). To address this hurdle, we opt in a high-resolution foreground feature encoding process. Given features $\boldsymbol{F}_s \in \mathbb{R}^{C \times d \times h \times w}$ extracted by the encoder $E$, where $d=D/r, h=H/r, w=W/r$ are downsampled dimensions with ratio $r$, we compute the foreground embedding by:
@@ -40,7 +40,7 @@ For multi-class segmentation, we generate separate task embeddings for each cate
 
 
 
-\subsubsection{Mask Decoding Module}
+\subsubsection*{Mask Decoding Module}
 The decoder $D$ employs a query-based architecture~\cite{cheng2022masked} that efficiently handles both single and multi-class segmentation tasks. For a query image with features $\boldsymbol{F}_q \in \mathbb{R}^{C \times d \times h \times w}$, the task encoding module generates class-specific embeddings $\boldsymbol{T}^k \in \mathbb{R}^{(m+1) \times C}$ for each class $k$ defined in reference image-label pairs. These embeddings are concatenated into a combined task representation $\boldsymbol{T} = [\boldsymbol{T}^1; \boldsymbol{T}^2; ...; \boldsymbol{T}^K] \in \mathbb{R}^{K(m+1) \times C}$, where $K$ is the number of target classes and $K=1$ for single-class segmentation. The bidirectional cross-attention mechanism processes this representation:
 \begin{equation}
 \boldsymbol{F}'_q, \boldsymbol{T}' = \text{CrossAttn}(\boldsymbol{F}_q, \boldsymbol{T})
@@ -50,7 +50,7 @@ where $\boldsymbol{F}'_q$ and $\boldsymbol{T}'$ are the updated features. This m
 \boldsymbol{\hat{y}}_q = D(\boldsymbol{F}'_q, \boldsymbol{T}') \in \{0,1\}^{K \times D \times H \times W}
 \end{equation}
 
-\subsubsection{Training} We train Iris in an end-to-end manner using episodic training to simulate in-context learning scenarios (details in supplementary). Each training episode consists of sampling reference-query pairs from the same dataset, computing task embeddings from the reference pair, and final predicting segmentation for the query image. The model is optimized using a combination of Dice and cross-entropy losses: $\mathcal{L}_{seg} = \mathcal{L}_{dice} + \mathcal{L}_{ce}$. To enhance generalization, we employ data augmentation on both query and reference images, add random perturbation to query images to simulate imperfect references, and randomly drop classes in multi-class datasets to encourage independent class-wise task encoding.
+\subsubsection*{Training} We train Iris in an end-to-end manner using episodic training to simulate in-context learning scenarios (details in supplementary). Each training episode consists of sampling reference-query pairs from the same dataset, computing task embeddings from the reference pair, and final predicting segmentation for the query image. The model is optimized using a combination of Dice and cross-entropy losses: $\mathcal{L}_{seg} = \mathcal{L}_{dice} + \mathcal{L}_{ce}$. To enhance generalization, we employ data augmentation on both query and reference images, add random perturbation to query images to simulate imperfect references, and randomly drop classes in multi-class datasets to encourage independent class-wise task encoding.
 
 \begin{figure}[t]
 \begin{center}
