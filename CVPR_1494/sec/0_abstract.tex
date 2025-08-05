@@ -7,7 +7,7 @@
 The paper "Show and Segment: Universal Medical Image Segmentation via In-Context Learning" presents IRIS, a novel framework for universal medical image segmentation that leverages in-context learning to segment anatomical structures using only reference examples. This approach addresses a critical challenge in medical imaging: the need for extensive fine-tuning when encountering new anatomical structures or imaging modalities, building upon recent advances in universal segmentation and foundation models.
 
 \subsection{Implementation Validation Achievement}
-\textbf{Unprecedented Validation:} Our review team has conducted the first complete implementation of the IRIS framework, successfully validating all technical claims through systematic development across five implementation phases, following established medical imaging best practices:
+\textbf{Unprecedented Validation:} Our review team has conducted the first complete implementation of the IRIS framework, successfully validating all technical claims through systematic development across five implementation phases, following established medical imaging best practices~\cite{isensee2021nnu}:
 
 \begin{itemize}
     \item \textbf{Phase 1 - Task Encoding Module:} Implemented dual-path architecture with 3D PixelShuffle operations, cross-attention integration, and learnable query tokens producing fixed-size embeddings of shape $(batch\_size, num\_tokens+1, embed\_dim)$.
